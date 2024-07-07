@@ -1,6 +1,9 @@
+import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rhythmix/common.dart';
+import 'package:rhythmix/models/song.dart';
+import 'package:rhythmix/remote.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Home extends StatefulWidget {
@@ -12,6 +15,33 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _player = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    // Inform the operating system of our app's audio attributes etc.
+    // We pick a reasonable default for an app that plays speech.
+    final Song song = await getSong();
+    final session = await AudioSession.instance;
+    await session.configure(const AudioSessionConfiguration.speech());
+    // Listen to errors during playback.
+    _player.playbackEventStream.listen((event) {},
+        onError: (Object e, StackTrace stackTrace) {
+      print('A stream error occurred: $e');
+    });
+    // Try to load audio from a source and catch any errors.
+    try {
+      // AAC example: https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac
+      await _player.setAudioSource(AudioSource.uri(
+          Uri.parse(song.data.results[0].downloadUrl.last.url)));
+    } on PlayerException catch (e) {
+      print("Error loading audio source: $e");
+    }
+  }
 
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
@@ -33,56 +63,71 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
-        title: const Text("Pushpa"),
+        title: Text("Alone - Alan Walker"),
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 36),
-              height: 400,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage("https://c.saavncdn.com/artists/Alan_Walker_003_20231116095443_500x500.jpg"),
-                  fit: BoxFit.cover,
+      body: FutureBuilder<Song>(
+        future: getSong(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
+            Song song = snapshot.data!;
+            return Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 36),
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            NetworkImage(song.data.results[0].image.last.url),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20),),
+                  Text(
+                    song.data.results[0].name,
+                    style: const TextStyle(
+                      fontSize: 44,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    song.data.results[0].artists.primary.first.name,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  StreamBuilder<PositionData>(
+                    stream: _positionDataStream,
+                    builder: (context, snapshot) {
+                      final positionData = snapshot.data;
+                      return SeekBar(
+                        duration: positionData?.duration ?? Duration.zero,
+                        position: positionData?.position ?? Duration.zero,
+                        bufferedPosition:
+                            positionData?.bufferedPosition ?? Duration.zero,
+                        onChangeEnd: _player.seek,
+                      );
+                    },
+                  ),
+                  Center(child: ControlButtons(_player)),
+                ],
               ),
-            ),
-            const Text(
-              "Srivalli",
-              style: TextStyle(
-                fontSize: 44,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Text(
-              "Javed Ali, Devi Sri Prasad",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.grey,
-              ),
-            ),
-            StreamBuilder<PositionData>(
-                stream: _positionDataStream,
-                builder: (context, snapshot) {
-                  final positionData = snapshot.data;
-                  return SeekBar(
-                    duration: positionData?.duration ?? Duration.zero,
-                    position: positionData?.position ?? Duration.zero,
-                    bufferedPosition:
-                        positionData?.bufferedPosition ?? Duration.zero,
-                    onChangeEnd: _player.seek,
-                  );
-                },
-              ),
-              Center(child: ControlButtons(_player)),
-          ],
-        ),
+            );
+          } else {
+            return const Text("No Song Found");
+          }
+        },
       ),
     );
   }

@@ -42,10 +42,8 @@ class SeekBarState extends State<SeekBar> {
         SliderTheme(
           data: _sliderThemeData.copyWith(
             thumbShape: HiddenThumbComponentShape(),
-            activeTrackColor: Colors.green,
-            inactiveTrackColor: const Color(0xFF3F4041),
-            trackHeight: 6,
-            thumbColor: Colors.green,
+            activeTrackColor: Colors.blue.shade100,
+            inactiveTrackColor: Colors.grey.shade300,
           ),
           child: ExcludeSemantics(
             child: Slider(
@@ -169,7 +167,6 @@ void showSliderDialog({
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0)),
               Slider(
-                activeColor: Colors.green,
                 divisions: divisions,
                 min: min,
                 max: max,
