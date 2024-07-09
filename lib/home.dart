@@ -15,11 +15,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _player = AudioPlayer();
+  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _init();
+  }
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 
   Future<void> _init() async {
@@ -63,8 +70,46 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
-        title: Text("Alone - Alan Walker"),
+        title: const Text("Alone - Alan Walker"),
         centerTitle: true,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+            ),
+            label: "Search",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.library_music,
+            ),
+            label: "Library",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+            ),
+            label: "Profile",
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color(0xFF222831),
+        iconSize: 32,
+        currentIndex: selectedIndex,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        onTap: onItemTapped,
+        elevation: 0,
       ),
       body: FutureBuilder<Song>(
         future: getSong(),
