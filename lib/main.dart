@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rhythmix/home.dart';
+import 'package:rhythmix/pages/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +21,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF222831),
       ),
-      home: const Home(
-      ),
+      home: const Home(),
     );
   }
 }

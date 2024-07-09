@@ -1,32 +1,26 @@
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:rhythmix/common.dart';
+import 'package:rhythmix/widgets/common.dart';
 import 'package:rhythmix/models/song.dart';
-import 'package:rhythmix/remote.dart';
+import 'package:rhythmix/functions/remote.dart';
 import 'package:rxdart/rxdart.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Player extends StatefulWidget {
+  const Player({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Player> createState() => _PlayerState();
 }
 
-class _HomeState extends State<Home> {
+class _PlayerState extends State<Player> with WidgetsBindingObserver{
   final _player = AudioPlayer();
-  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    ambiguate(WidgetsBinding.instance)!.addObserver(this);
     _init();
-  }
-
-  void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
   }
 
   Future<void> _init() async {
@@ -38,7 +32,7 @@ class _HomeState extends State<Home> {
     // Listen to errors during playback.
     _player.playbackEventStream.listen((event) {},
         onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
+      debugPrint('A stream error occurred: $e');
     });
     // Try to load audio from a source and catch any errors.
     try {
@@ -46,10 +40,31 @@ class _HomeState extends State<Home> {
       await _player.setAudioSource(AudioSource.uri(
           Uri.parse(song.data.results[0].downloadUrl.last.url)));
     } on PlayerException catch (e) {
-      print("Error loading audio source: $e");
+      debugPrint("Error loading audio source: $e");
     }
   }
 
+   @override
+  void dispose() {
+    ambiguate(WidgetsBinding.instance)!.removeObserver(this);
+    // Release decoders and buffers back to the operating system making them
+    // available for other apps to use.
+    _player.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      // Release the player's resources when not in use. We use "stop" so that
+      // if the app resumes later, it will still remember what position to
+      // resume from.
+      _player.stop();
+    }
+  }
+
+  /// Collects the data useful for displaying in a seek bar, using a handy
+  /// feature of rx_dart to combine the 3 streams of interest into one.
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
           _player.positionStream,
@@ -72,44 +87,6 @@ class _HomeState extends State<Home> {
         elevation: 0,
         title: const Text("Alone - Alan Walker"),
         centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-            ),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.library_music,
-            ),
-            label: "Library",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: "Profile",
-          ),
-        ],
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF222831),
-        iconSize: 32,
-        currentIndex: selectedIndex,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        onTap: onItemTapped,
-        elevation: 0,
       ),
       body: FutureBuilder<Song>(
         future: getSong(),
