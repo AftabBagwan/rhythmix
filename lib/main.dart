@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/pages/home.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     });
     _pageController.jumpToPage(index);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF222831),
+          backgroundColor: AppColors.primaryColor,
         iconSize: 32,
         currentIndex: selectedIndex,
         showSelectedLabels: true,
@@ -73,11 +74,7 @@ class _MyAppState extends State<MyApp> {
       body: PageView(
         controller: _pageController,
         children: const [
-          Scaffold(
-            body: Center(
-              child: Text("Home"),
-            ),
-          ),
+            Home(),
           Scaffold(
             body: Center(
               child: Text("Search"),
