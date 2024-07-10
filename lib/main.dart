@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/pages/home.dart';
 import 'package:rhythmix/pages/search.dart';
-import 'package:rhythmix/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF222831),
-        useMaterial3: true,
+        // useMaterial3: true,
       ),
       home: Scaffold(
         extendBody: true,

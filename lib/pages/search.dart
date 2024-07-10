@@ -61,7 +61,32 @@ class _SearchState extends State<Search> {
                         ),
                       )),
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, bottom: 20),
+                child: Text(
+                  "Browse all",
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              // Container(
+              //   height: 300,
+              //   child: GridView(
+              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2,
+              //     ),
+              //     children: [
+              //       GenreCard(),
+              //       GenreCard(),
+              //       GenreCard(),
+              //       GenreCard(),
+              //     ],
+              //   ),
+              // )
             ],
           ),
           
