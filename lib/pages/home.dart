@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
+        bottom: false,
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(left: 20.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/pages/home.dart';
+import 'package:rhythmix/pages/search.dart';
 import 'package:rhythmix/utils/colors.dart';
 
 void main() {
@@ -34,6 +35,8 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -62,8 +65,8 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.primaryColor,
-        iconSize: 32,
+          backgroundColor: Color(0x00ffffff),
+          iconSize: 36,
         currentIndex: selectedIndex,
         showSelectedLabels: true,
         showUnselectedLabels: true,
@@ -71,16 +74,20 @@ class _MyAppState extends State<MyApp> {
         unselectedItemColor: Colors.grey,
         onTap: onItemTapped,
         elevation: 0,
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: Colors.white,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontSize: 14,
+          ),
       ),
         body: PageView(
           controller: _pageController,
           children: const [
             Home(),
-            Scaffold(
-              body: Center(
-                child: Text("Search"),
-              ),
-            ),
+            Search(),
             Scaffold(
               body: Center(
                 child: Text("Library"),
