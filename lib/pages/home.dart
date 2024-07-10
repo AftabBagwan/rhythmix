@@ -75,6 +75,13 @@ class _HomeState extends State<Home> {
                             backgroundColor: MaterialStateProperty.all(
                               const Color(0xFF0C3B2D),
                             ),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
                           ),
                           onPressed: () {},
                           child: const Text(
@@ -116,6 +123,13 @@ class _HomeState extends State<Home> {
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               const Color(0xFF0C3B2D),
+                            ),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
                             ),
                           ),
                           onPressed: () {},
