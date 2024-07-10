@@ -15,8 +15,18 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.only(left: 20.0),
+          // decoration: const BoxDecoration(
+          //   gradient: LinearGradient(
+          //     begin: Alignment.topLeft,
+          //     end: Alignment.bottomRight,
+          //     colors: [
+          //       Colors.lightGreen,
+          //       Colors.transparent,
+          //     ],
+          //   ),
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,11 +41,53 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Container(
-                height: 500,
+              SizedBox(
+                height: 300,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: [
+                  children: const [
+                    SongCard(),
+                    SongCard(),
+                    SongCard(),
+                    SongCard(),
+                    SongCard()
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Charts",
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            const Color(0xFF0C3B2D),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          "SEE ALL",
+                          style: TextStyle(
+                              color: Colors.lightGreen,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 300,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
                     SongCard(),
                     SongCard(),
                     SongCard(),

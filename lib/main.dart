@@ -31,15 +31,16 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF222831),
+        useMaterial3: true,
       ),
       home: Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+                Icons.home_filled,
             ),
-            label: "Player",
+              label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.library_music,
+                Icons.my_library_music_sharp,
             ),
             label: "Library",
           ),
@@ -71,27 +72,27 @@ class _MyAppState extends State<MyApp> {
         onTap: onItemTapped,
         elevation: 0,
       ),
-      body: PageView(
-        controller: _pageController,
-        children: const [
+        body: PageView(
+          controller: _pageController,
+          children: const [
             Home(),
-          Scaffold(
-            body: Center(
-              child: Text("Search"),
+            Scaffold(
+              body: Center(
+                child: Text("Search"),
+              ),
             ),
-          ),
-          Scaffold(
-            body: Center(
-              child: Text("Library"),
+            Scaffold(
+              body: Center(
+                child: Text("Library"),
+              ),
             ),
-          ),
-          Scaffold(
-            body: Center(
-              child: Text("Profile"),
+            Scaffold(
+              body: Center(
+                child: Text("Profile"),
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
     ),
     );
   }

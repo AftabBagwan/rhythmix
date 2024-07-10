@@ -241,11 +241,11 @@ class DownloadUrl {
 }
 
 enum Type {
-    ARTIST
+    artist
 }
 
 final typeValues = EnumValues({
-    "artist": Type.ARTIST
+    "artist": Type.artist
 });
 
 class EnumValues<T> {
