@@ -7,9 +7,13 @@ class GenreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: 300,
-      color: Colors.red,
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
     );
   }
 }

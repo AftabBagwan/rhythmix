@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF222831),
-        // useMaterial3: true,
+        useMaterial3: true,
       ),
       home: Scaffold(
         extendBody: true,
