@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rhythmix/widgets/common.dart';
 import 'package:rhythmix/models/song.dart';
-import 'package:rhythmix/functions/remote.dart';
+import 'package:rhythmix/services/remote.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Player extends StatefulWidget {
@@ -13,7 +13,7 @@ class Player extends StatefulWidget {
   State<Player> createState() => _PlayerState();
 }
 
-class _PlayerState extends State<Player> with WidgetsBindingObserver{
+class _PlayerState extends State<Player> with WidgetsBindingObserver {
   final _player = AudioPlayer();
 
   @override
@@ -44,7 +44,7 @@ class _PlayerState extends State<Player> with WidgetsBindingObserver{
     }
   }
 
-   @override
+  @override
   void dispose() {
     ambiguate(WidgetsBinding.instance)!.removeObserver(this);
     // Release decoders and buffers back to the operating system making them
@@ -95,55 +95,57 @@ class _PlayerState extends State<Player> with WidgetsBindingObserver{
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData) {
             Song song = snapshot.data!;
-            return Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 36),
-                    height: 400,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image:
-                            NetworkImage(song.data.results[0].image.last.url),
-                        fit: BoxFit.cover,
+            return SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 36),
+                      height: 400,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image:
+                              NetworkImage(song.data.results[0].image.last.url),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+                    ),
+                    Text(
+                      song.data.results[0].name,
+                      style: const TextStyle(
+                        fontSize: 44,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  Text(
-                    song.data.results[0].name,
-                    style: const TextStyle(
-                      fontSize: 44,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      song.data.results[0].artists.primary.first.name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                  Text(
-                    song.data.results[0].artists.primary.first.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      color: Colors.grey,
+                    StreamBuilder<PositionData>(
+                      stream: _positionDataStream,
+                      builder: (context, snapshot) {
+                        final positionData = snapshot.data;
+                        return SeekBar(
+                          duration: positionData?.duration ?? Duration.zero,
+                          position: positionData?.position ?? Duration.zero,
+                          bufferedPosition:
+                              positionData?.bufferedPosition ?? Duration.zero,
+                          onChangeEnd: _player.seek,
+                        );
+                      },
                     ),
-                  ),
-                  StreamBuilder<PositionData>(
-                    stream: _positionDataStream,
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data;
-                      return SeekBar(
-                        duration: positionData?.duration ?? Duration.zero,
-                        position: positionData?.position ?? Duration.zero,
-                        bufferedPosition:
-                            positionData?.bufferedPosition ?? Duration.zero,
-                        onChangeEnd: _player.seek,
-                      );
-                    },
-                  ),
-                  Center(child: ControlButtons(_player)),
-                ],
+                    Center(child: ControlButtons(_player)),
+                  ],
+                ),
               ),
             );
           } else {

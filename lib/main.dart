@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/pages/home.dart';
+import 'package:rhythmix/pages/player.dart';
 import 'package:rhythmix/pages/search.dart';
 
 void main() {
@@ -52,9 +53,9 @@ class _MyAppState extends State<MyApp> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.my_library_music_sharp,
+                Icons.music_note,
             ),
-            label: "Library",
+              label: "Player",
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -87,11 +88,7 @@ class _MyAppState extends State<MyApp> {
           children: const [
             Home(),
             Search(),
-            Scaffold(
-              body: Center(
-                child: Text("Library"),
-              ),
-            ),
+            Player(),
             Scaffold(
               body: Center(
                 child: Text("Profile"),

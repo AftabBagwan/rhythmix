@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ArtistCard extends StatelessWidget {
-  const ArtistCard({super.key});
+  const ArtistCard({super.key, required this.artistImageUrl});
+  final String artistImageUrl;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(right: 32.0),
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
       child: CircleAvatar(
-        radius: 120,
+        radius: 72,
         backgroundImage: NetworkImage(
-            "https://static.toiimg.com/thumb/imgsize-23456,msid-99213152,width-600,resizemode-4/99213152.jpg"),
+            artistImageUrl),
       ),
     );
   }

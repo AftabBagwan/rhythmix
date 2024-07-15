@@ -8,8 +8,8 @@ class SongCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20, right: 20),
-      width: 180,
-      height: 240,
+      width: 120,
+      height: 160,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(20),
@@ -19,8 +19,8 @@ class SongCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 180,
-            height: 180,
+            width: 120,
+            height: 120,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -38,7 +38,7 @@ class SongCard extends StatelessWidget {
             child: Text(
               "Pushpa - The Rise",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: AppColors.white,
               ),
@@ -47,7 +47,7 @@ class SongCard extends StatelessWidget {
           Text(
             "Single - Devi Sri Prasad",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 10,
               color: AppColors.grey,
             ),
           ),

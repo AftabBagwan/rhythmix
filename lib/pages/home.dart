@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
 import 'package:rhythmix/widgets/song_card.dart';
 
@@ -38,14 +39,14 @@ class _HomeState extends State<Home> {
                   child: Text(
                     "Trending Now",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 22,
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: const [
@@ -63,13 +64,14 @@ class _HomeState extends State<Home> {
                     Text(
                       "Charts",
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 22,
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.only(right: 20.0),
+                      height: 30,
                       child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -94,7 +96,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: const [
@@ -112,13 +114,14 @@ class _HomeState extends State<Home> {
                     Text(
                       "Popular Artists",
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 22,
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.only(right: 20.0),
+                      height: 30,
                       child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -143,16 +146,14 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 SizedBox(
-                  height: 300,
-                  child: ListView(
+                  height: 180,
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    children: const [
-                      ArtistCard(),
-                      ArtistCard(),
-                      ArtistCard(),
-                      ArtistCard(),
-                      ArtistCard(),
-                    ],
+                    itemCount: artist.length,
+                    itemBuilder: (context, index) {
+                      return ArtistCard(
+                          artistImageUrl: artistImage[artist[index]]);
+                    },
                   ),
                 ),
               ],
