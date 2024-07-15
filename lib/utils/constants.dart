@@ -32,3 +32,14 @@ Map<String, dynamic> artistImage = {
   "Justin Bieber":
       "https://c.saavncdn.com/artists/Justin_Bieber_005_20201127112218_500x500.jpg",
 };
+
+List<String> genreList = [
+  "Hindi",
+  "Punjabi",
+  "Marathi",
+  "English",
+  "Bhojpuri",
+  "Haryanvi",
+  "Bollywood",
+  "Urdu",
+];

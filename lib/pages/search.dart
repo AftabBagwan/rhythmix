@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/genre_card.dart';
 
 class Search extends StatefulWidget {
@@ -75,30 +76,21 @@ class _SearchState extends State<Search> {
                 ),
               ),
               Expanded(
-                child: GridView(
+                child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 3 / 2,
                   ),
-                  children: [
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                    GenreCard(),
-                  ],
+                  itemCount: genreList.length,
+                  itemBuilder: (context, index) {
+                    return GenreCard(
+                      genreName: genreList[index],
+                    );
+                  },
                 ),
               )
             ],
           ),
-          
         ),
       ),
     );
