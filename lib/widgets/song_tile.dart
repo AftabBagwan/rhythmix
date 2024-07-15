@@ -9,14 +9,13 @@ class SongTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 40,
       padding: const EdgeInsets.all(10),
       child: Row(
         children: [
           Container(
-            height: 20,
-            width: 20,
-            padding: const EdgeInsets.only(left: 20),
+            height: 40,
+            width: 40,
+            margin: const EdgeInsets.only(right: 20),
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(songImage), fit: BoxFit.cover),
