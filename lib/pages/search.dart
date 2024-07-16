@@ -27,7 +27,6 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColors.primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
         child: Column(
