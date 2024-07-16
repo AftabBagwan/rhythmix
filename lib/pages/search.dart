@@ -4,7 +4,6 @@ import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/genre_card.dart';
-import 'package:rhythmix/widgets/song_tile.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -73,7 +72,7 @@ class _SearchState extends State<Search> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Text(
                 "Browse all",
                 style: TextStyle(
@@ -103,11 +102,34 @@ class _SearchState extends State<Search> {
                 child: ListView.builder(
                   itemCount: searchSongResult.data.results.length,
                   itemBuilder: (context, index) {
-                    return SongTile(
-                      songImage:
-                          searchSongResult.data.results[index].image.last.url,
-                      songName: searchSongResult.data.results[index].name,
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(searchSongResult.data.results[index].name),
+                      subtitle: Text(searchSongResult
+                          .data.results[index].artists.all.first.name),
+                      leading: Container(
+                        width: 55,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              searchSongResult
+                                  .data.results[index].image.last.url,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.play_circle,
+                        size: 32,
+                      ),
                     );
+                    // return SongTile(
+                    //   songImage:
+                    //       searchSongResult.data.results[index].image.last.url,
+                    //   songName: searchSongResult.data.results[index].name,
+                    // );
                   },
                 ),
               ),
