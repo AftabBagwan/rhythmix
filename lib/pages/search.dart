@@ -115,19 +115,6 @@ class _SearchState extends State<Search> {
                             searchSongResult.data.results[index].name);
                         bottombarProvider.changePage(2);
                         playerProvider.songSelected();
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Player(
-                        //       songName:
-                        //           searchSongResult.data.results[index].name,
-                        //       songImage: searchSongResult
-                        //           .data.results[index].image.last.url,
-                        //       music: searchSongResult
-                        //           .data.results[index].downloadUrl.last.url,
-                        //     ),
-                        //   ),
-                        // );
                       },
                       contentPadding: EdgeInsets.zero,
                       title: Text(searchSongResult.data.results[index].name),

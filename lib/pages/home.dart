@@ -18,24 +18,6 @@ class _HomeState extends State<Home> {
   List<SearchSong> topAlbumSongs = [];
 
   @override
-  void initState() {
-    super.initState();
-    getTopAlbumSongs();
-  }
-
-  getTopAlbumSongs() async {
-    List<SearchSong> listOfAlbum = [];
-    for (int i = 0; i < topAlbums.length; i++) {
-      var albums = await searchSong(topAlbums[i]);
-      listOfAlbum.add(albums);
-    }
-    if (!mounted) return;
-    setState(() {
-      topAlbumSongs = listOfAlbum;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,

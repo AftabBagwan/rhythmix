@@ -37,6 +37,7 @@ class PlayerProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     
+    
     await Future.delayed(const Duration(milliseconds: 100));
 
     try {
