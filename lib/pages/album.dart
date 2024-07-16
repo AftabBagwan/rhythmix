@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/providers/player_provider.dart';
 
-class AlbumScreen extends StatelessWidget {
+class AlbumScreen extends StatefulWidget {
   const AlbumScreen(
       {super.key,
       required this.albumImage,
@@ -18,7 +21,15 @@ class AlbumScreen extends StatelessWidget {
   final List<Result> songs;
 
   @override
+  State<AlbumScreen> createState() => _AlbumScreenState();
+}
+
+class _AlbumScreenState extends State<AlbumScreen> {
+  @override
   Widget build(BuildContext context) {
+    final playerProvider = Provider.of<PlayerProvider>(context);
+    final bottombarProvider = Provider.of<BottomNavProvider>(context);
+
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -33,7 +44,7 @@ class AlbumScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 40),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(albumImage),
+                    image: NetworkImage(widget.albumImage),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -41,7 +52,7 @@ class AlbumScreen extends StatelessWidget {
               ),
             ),
             Text(
-              albumName,
+              widget.albumName,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 24,
@@ -49,7 +60,8 @@ class AlbumScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "$releaseDate . $albumLangiage . $artist".toUpperCase(),
+              "${widget.releaseDate} . ${widget.albumLangiage} . ${widget.artist}"
+                  .toUpperCase(),
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 16,
@@ -57,23 +69,26 @@ class AlbumScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: songs.length,
+                itemCount: widget.songs.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(
-                      songs[index].name,
-                    ),
-                    subtitle: Text(
-                      overflow: TextOverflow.ellipsis,
-                      "${songs[index].artists.all.first.name} , ${songs[index].artists.all.last.name}",
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.play_circle,
-                          size: 32,
-                        )),
-                  );
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        playerProvider.loadSong(widget.songs[index].name);
+                        bottombarProvider.changePage(2);
+                        playerProvider.songSelected();
+                      },
+                      title: Text(
+                        widget.songs[index].name,
+                      ),
+                      subtitle: Text(
+                        overflow: TextOverflow.ellipsis,
+                        "${widget.songs[index].artists.all.first.name} , ${widget.songs[index].artists.all.last.name}",
+                      ),
+                      trailing: const Icon(
+                        Icons.play_circle,
+                        size: 32,
+                      ));
                 },
               ),
             ),
