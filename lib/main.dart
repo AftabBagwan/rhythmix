@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0x00ffffff),
+          backgroundColor: const Color(0x00ffffff),
           iconSize: 36,
         currentIndex: selectedIndex,
         showSelectedLabels: true,

@@ -2,6 +2,8 @@
 //
 //     final searchSong = searchSongFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 SearchSong searchSongFromJson(String str) => SearchSong.fromJson(json.decode(str));

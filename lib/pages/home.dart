@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/pages/album.dart';
 import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
@@ -110,6 +111,40 @@ class _HomeState extends State<Home> {
                             .primary
                             .first
                             .name,
+                        redirectTo: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AlbumScreen(
+                                albumImage: topAlbumSongs[index]
+                                    .data
+                                    .results[0]
+                                    .image
+                                    .last
+                                    .url,
+                                albumName: topAlbumSongs[index]
+                                    .data
+                                    .results[0]
+                                    .album
+                                    .name,
+                                releaseDate:
+                                    topAlbumSongs[index].data.results[0].year,
+                                albumLangiage: topAlbumSongs[index]
+                                    .data
+                                    .results[0]
+                                    .language,
+                                artist: topAlbumSongs[index]
+                                    .data
+                                    .results[0]
+                                    .artists
+                                    .primary
+                                    .first
+                                    .name,
+                                    songs: topAlbumSongs[index].data.results,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
