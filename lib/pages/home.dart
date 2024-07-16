@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/pages/album.dart';
+import 'package:rhythmix/pages/artist.dart';
 import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
@@ -90,56 +91,50 @@ class _HomeState extends State<Home> {
                           itemCount: homeProvider.topAlbumSongs.length,
                           itemBuilder: (context, index) {
                             return SongCard(
-                              songImage: homeProvider.topAlbumSongs[index]
-                                  .data
-                                  .results[0]
-                                  .image
-                                  .last
-                                  .url,
-                              songName: homeProvider.topAlbumSongs[index]
-                                  .data
-                                  .results[0]
-                                  .album
-                                  .name,
+                              songImage: homeProvider.topAlbumSongs[index].data
+                                  .results[0].image.last.url,
+                              songName: homeProvider.topAlbumSongs[index].data
+                                  .results[0].album.name,
                               description: homeProvider.topAlbumSongs[index]
-                                  .data
-                                  .results[0]
-                                  .artists
-                                  .primary
-                                  .first
-                                  .name,
+                                  .data.results[0].artists.primary.first.name,
                               redirectTo: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AlbumScreen(
-                                      albumImage: homeProvider.topAlbumSongs[index]
+                                      albumImage: homeProvider
+                                          .topAlbumSongs[index]
                                           .data
                                           .results[0]
                                           .image
                                           .last
                                           .url,
-                                      albumName: homeProvider.topAlbumSongs[index]
+                                      albumName: homeProvider
+                                          .topAlbumSongs[index]
                                           .data
                                           .results[0]
                                           .album
                                           .name,
-                                      releaseDate: homeProvider.topAlbumSongs[index]
+                                      releaseDate: homeProvider
+                                          .topAlbumSongs[index]
                                           .data
                                           .results[0]
                                           .year,
-                                      albumLangiage: homeProvider.topAlbumSongs[index]
+                                      albumLangiage: homeProvider
+                                          .topAlbumSongs[index]
                                           .data
                                           .results[0]
                                           .language,
-                                      artist: homeProvider.topAlbumSongs[index]
+                                      artist: homeProvider
+                                          .topAlbumSongs[index]
                                           .data
                                           .results[0]
                                           .artists
                                           .primary
                                           .first
                                           .name,
-                                      songs: homeProvider.topAlbumSongs[index].data.results,
+                                      songs: homeProvider
+                                          .topAlbumSongs[index].data.results,
                                     ),
                                   ),
                                 );
@@ -167,8 +162,20 @@ class _HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           itemCount: artist.length,
                           itemBuilder: (context, index) {
-                            return ArtistCard(
-                                artistImageUrl: artistImage[artist[index]]);
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ArtistScreen(artist: artist[index]),
+                                  ),
+                                );
+                              },
+                              child: ArtistCard(
+                                artistImageUrl: artistImage[artist[index]],
+                              ),
+                            );
                           },
                         ),
                       ),
