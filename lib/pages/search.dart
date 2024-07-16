@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/pages/player.dart';
 import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
@@ -103,6 +104,16 @@ class _SearchState extends State<Search> {
                   itemCount: searchSongResult.data.results.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Player(
+                              songName: searchSongResult
+                                  .data.results[index].name,
+                              songImage: searchSongResult
+                                  .data.results[index].image.last.url,
+                              music: searchSongResult.data.results[index].downloadUrl.last.url,
+                            ),),);
+                      },
                       contentPadding: EdgeInsets.zero,
                       title: Text(searchSongResult.data.results[index].name),
                       subtitle: Text(searchSongResult

@@ -104,7 +104,7 @@ class Result {
         duration: json["duration"],
         label: json["label"] ?? "",
         explicitContent: json["explicitContent"],
-        playCount: json["playCount"],
+        playCount: json["playCount"] ?? 0,
         language: json["language"],
         hasLyrics: json["hasLyrics"],
         lyricsId: json["lyricsId"],

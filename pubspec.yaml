@@ -39,6 +39,7 @@ dependencies:
   audio_session: ^0.1.19
   rxdart: ^0.27.7
   http:
+  provider:
 
 dev_dependencies:
   flutter_test:
