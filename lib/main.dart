@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/pages/bottom_nav_bar.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 
@@ -19,7 +20,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => BottomNavProvider(),
         ),
-        ChangeNotifierProvider(create: (context) => PlayerProvider(),),
+        ChangeNotifierProvider(
+          create: (context) => PlayerProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeProvider(),
+          lazy: false,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
