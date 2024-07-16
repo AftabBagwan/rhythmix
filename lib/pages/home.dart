@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
@@ -12,6 +14,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<SearchSong> topAlbumSongs = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getTopAlbumSongs();
+  }
+
+  getTopAlbumSongs() async {
+    List<SearchSong> listOfAlbum = [];
+    for (int i = 0; i < topAlbums.length; i++) {
+      var albums = await searchSong(topAlbums[i]);
+      listOfAlbum.add(albums);
+    }
+    setState(() {
+      topAlbumSongs = listOfAlbum;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,50 +83,35 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Charts",
+                      "Top Albums",
                       style: TextStyle(
                         fontSize: 22,
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      height: 30,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF0C3B2D),
-                            ),
-                            shape: MaterialStateProperty.all(
-                              const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "SEE ALL",
-                            style: TextStyle(
-                                color: Colors.lightGreen,
-                                fontWeight: FontWeight.bold),
-                          )),
-                    ),
                   ],
                 ),
                 SizedBox(
                   height: 200,
-                  child: ListView(
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    children: const [
-                      SongCard(),
-                      SongCard(),
-                      SongCard(),
-                      SongCard(),
-                      SongCard()
-                    ],
+                    itemCount: topAlbumSongs.length,
+                    itemBuilder: (context, index) {
+                      return SongCard(
+                        songImage:
+                            topAlbumSongs[index].data.results[0].image.last.url,
+                        songName:
+                            topAlbumSongs[index].data.results[0].album.name,
+                        description: topAlbumSongs[index]
+                            .data
+                            .results[0]
+                            .artists
+                            .primary
+                            .first
+                            .name,
+                      );
+                    },
                   ),
                 ),
                 Row(
@@ -118,30 +124,6 @@ class _HomeState extends State<Home> {
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      height: 30,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF0C3B2D),
-                            ),
-                            shape: MaterialStateProperty.all(
-                              const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "SEE ALL",
-                            style: TextStyle(
-                                color: Colors.lightGreen,
-                                fontWeight: FontWeight.bold),
-                          )),
                     ),
                   ],
                 ),

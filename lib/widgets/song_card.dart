@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:rhythmix/utils/colors.dart';
 
 class SongCard extends StatelessWidget {
-  const SongCard({super.key});
+  const SongCard({super.key, this.songImage, this.songName, this.description});
+  final String? songImage;
+  final String? songName;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +24,14 @@ class SongCard extends StatelessWidget {
           Container(
             width: 120,
             height: 120,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),
               image: DecorationImage(
                 image: NetworkImage(
-                  "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/pushpa--the-rise-et00129538-08-12-2021-01-21-46.jpg",
+                  songImage ??
+                      "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/pushpa--the-rise-et00129538-08-12-2021-01-21-46.jpg",
                 ),
                 fit: BoxFit.cover,
               ),
@@ -36,7 +40,8 @@ class SongCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
             child: Text(
-              "Pushpa - The Rise",
+              songName ?? "Pushpa - The Rise",
+              softWrap: false,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -45,7 +50,7 @@ class SongCard extends StatelessWidget {
             ),
           ),
           Text(
-            "Single - Devi Sri Prasad",
+            description ?? "Single - Devi Sri Prasad",
             style: TextStyle(
               fontSize: 10,
               color: AppColors.grey,

@@ -100,7 +100,7 @@ class Result {
         year: json["year"],
         releaseDate: json["releaseDate"],
         duration: json["duration"],
-        label: json["label"],
+        label: json["label"] ?? "",
         explicitContent: json["explicitContent"],
         playCount: json["playCount"],
         language: json["language"],

@@ -43,3 +43,15 @@ List<String> genreList = [
   "Bollywood",
   "Urdu",
 ];
+
+List<String> topAlbums = [
+  "Shershaah",
+  "Kabir Singh",
+  "Jannat",
+  "Dilwale",
+  "Bhediya",
+  "Zara Hatke Zara Bachke",
+  "Aashique 2",
+  "Ek Villain",
+  "Teri Baaton Mein Aisa Uljha Jiya",
+];
