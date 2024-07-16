@@ -42,8 +42,8 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        total: json["total"],
-        start: json["start"],
+        total: json["total"] ?? 0,
+        start: json["start"] ?? 0,
         results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
     );
 

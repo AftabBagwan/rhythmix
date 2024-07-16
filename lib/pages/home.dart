@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
       var albums = await searchSong(topAlbums[i]);
       listOfAlbum.add(albums);
     }
+    if (!mounted) return;
     setState(() {
       topAlbumSongs = listOfAlbum;
     });
@@ -140,7 +141,7 @@ class _HomeState extends State<Home> {
                                     .primary
                                     .first
                                     .name,
-                                    songs: topAlbumSongs[index].data.results,
+                                songs: topAlbumSongs[index].data.results,
                               ),
                             ),
                           );

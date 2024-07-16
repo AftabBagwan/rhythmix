@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/pages/player.dart';
+import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/services/remote.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
@@ -19,6 +22,7 @@ class _SearchState extends State<Search> {
 
   void searchKeyword(String query) async {
     var result = await searchSong(query);
+    if (!mounted) return;
     setState(() {
       searchSongResult = result;
     });
@@ -26,6 +30,9 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    final playerProvider = Provider.of<PlayerProvider>(context);
+    final bottombarProvider = Provider.of<BottomNavProvider>(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
@@ -104,14 +111,23 @@ class _SearchState extends State<Search> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Player(
-                              songName: searchSongResult
-                                  .data.results[index].name,
-                              songImage: searchSongResult
-                                  .data.results[index].image.last.url,
-                              music: searchSongResult.data.results[index].downloadUrl.last.url,
-                            ),),);
+                        playerProvider.loadSong(
+                            searchSongResult.data.results[index].name);
+                        bottombarProvider.changePage(2);
+                        playerProvider.songSelected();
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => Player(
+                        //       songName:
+                        //           searchSongResult.data.results[index].name,
+                        //       songImage: searchSongResult
+                        //           .data.results[index].image.last.url,
+                        //       music: searchSongResult
+                        //           .data.results[index].downloadUrl.last.url,
+                        //     ),
+                        //   ),
+                        // );
                       },
                       contentPadding: EdgeInsets.zero,
                       title: Text(searchSongResult.data.results[index].name),
