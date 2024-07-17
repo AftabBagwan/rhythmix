@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
+import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/common.dart';
 import 'package:rhythmix/widgets/player_control_buttons.dart';
 
@@ -62,9 +63,9 @@ class Player extends StatelessWidget {
                       Text(
                         playerProvider.currentSong.data.results[0].artists
                             .primary.first.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey,
+                          color: AppColors.grey,
                         ),
                       ),
                       StreamBuilder<PositionData>(

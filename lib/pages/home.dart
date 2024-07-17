@@ -31,8 +31,13 @@ class _HomeState extends State<Home> {
           child: Consumer<HomeProvider>(
             builder: (context, homeProvider, child) {
               if (homeProvider.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.white,
+                    ),
+                  ),
                 );
               } else {
                 return Container(

@@ -4,6 +4,7 @@ import 'package:rhythmix/pages/home.dart';
 import 'package:rhythmix/pages/player.dart';
 import 'package:rhythmix/pages/search.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/song_snack_bar.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -47,16 +48,16 @@ class BottomNavBar extends StatelessWidget {
             currentIndex: provider.currentIndex,
             showSelectedLabels: true,
             showUnselectedLabels: true,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.grey,
+            selectedItemColor: AppColors.white,
+            unselectedItemColor: AppColors.grey,
             onTap: (index) {
               provider.changePage(index);
             },
             elevation: 0,
-            selectedLabelStyle: const TextStyle(
+            selectedLabelStyle: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             unselectedLabelStyle: const TextStyle(
               fontSize: 14,

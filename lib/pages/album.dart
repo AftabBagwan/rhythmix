@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 class AlbumScreen extends StatelessWidget {
   const AlbumScreen(
@@ -57,8 +58,8 @@ class AlbumScreen extends StatelessWidget {
             Text(
               "$releaseDate . $albumLangiage . $artist"
                   .toUpperCase(),
-              style: const TextStyle(
-                color: Colors.grey,
+              style: TextStyle(
+                color: AppColors.grey,
                 fontSize: 16,
               ),
             ),

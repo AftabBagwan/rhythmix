@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/pages/genre.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 class GenreCard extends StatelessWidget {
   const GenreCard({super.key, required this.genreName});
@@ -19,7 +20,7 @@ class GenreCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.grey.shade800,
+          color: AppColors.greyShad800,
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),

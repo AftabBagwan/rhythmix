@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 class SongSnackBar extends StatelessWidget {
   const SongSnackBar({super.key});
@@ -22,7 +23,7 @@ class SongSnackBar extends StatelessWidget {
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.black87,
+              color: AppColors.black87,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -47,15 +48,15 @@ class SongSnackBar extends StatelessWidget {
                   children: [
                     Text(
                       playerProvider.currentSong.data.results[0].name,
-                      style: const TextStyle(
-                          color: Colors.white,
+                      style: TextStyle(
+                          color: AppColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       playerProvider.currentSong.data.results[0].artists.primary
                           .first.name,
-                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(color: AppColors.white, fontSize: 14),
                     ),
                   ],
                 ),
@@ -65,7 +66,7 @@ class SongSnackBar extends StatelessWidget {
                       playerProvider.player.playing
                           ? Icons.pause
                           : Icons.play_arrow,
-                      color: Colors.white),
+                      color: AppColors.white),
                   onPressed: () {
                     if (playerProvider.player.playing) {
                       playerProvider.pauseSong();

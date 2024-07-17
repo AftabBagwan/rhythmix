@@ -52,7 +52,7 @@ class PlayerControlButtons extends StatelessWidget {
               );
             } else if (playing != true) {
               return IconButton(
-                icon: const Icon(Icons.play_arrow),
+                icon: const Icon(Icons.play_circle),
                 iconSize: 64.0,
                 onPressed: () {
                   playerProvider.playSong();
@@ -61,7 +61,7 @@ class PlayerControlButtons extends StatelessWidget {
               );
             } else if (processingState != ProcessingState.completed) {
               return IconButton(
-                  icon: const Icon(Icons.pause),
+                  icon: const Icon(Icons.pause_circle),
                   iconSize: 64.0,
                   onPressed: () {
                     playerProvider.pauseSong();
