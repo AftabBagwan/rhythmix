@@ -40,6 +40,7 @@ class PlayerProvider extends ChangeNotifier {
     await Future.delayed(const Duration(milliseconds: 100));
 
     try {
+      await _player.stop();
       _currentSong = await searchSong(songName);
       await _player.setAudioSource(
         AudioSource.uri(
@@ -47,6 +48,9 @@ class PlayerProvider extends ChangeNotifier {
       );
       _isLoading = false;
       notifyListeners();
+      if(_hasSelectedSong) {
+        _player.play();
+      }
     } on PlayerException catch (e) {
       debugPrint("Error loading audio source: $e");
       _isLoading = false;
@@ -56,7 +60,6 @@ class PlayerProvider extends ChangeNotifier {
 
   void songSelected() {
     _hasSelectedSong = true;
-    if (_isLoading) player.play();
   }
 
   Stream<PositionData> get positionDataStream =>
