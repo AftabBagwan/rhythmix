@@ -12,7 +12,7 @@ class SongSnackBar extends StatelessWidget {
 
     return Consumer<PlayerProvider>(
       builder: (context, playerProvider, child) {
-        if (bottomNavProvider.currentIndex == 1 ||
+        if (bottomNavProvider.currentIndex != 0 ||
             !playerProvider.hasSelectedSong ||
             playerProvider.currentSong == null) {
           return const SizedBox.shrink();

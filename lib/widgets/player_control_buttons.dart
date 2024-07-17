@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
+import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/widgets/common.dart';
 
 class PlayerControlButtons extends StatelessWidget {
@@ -9,6 +11,7 @@ class PlayerControlButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final playerProvider = Provider.of<PlayerProvider>(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -51,14 +54,18 @@ class PlayerControlButtons extends StatelessWidget {
               return IconButton(
                 icon: const Icon(Icons.play_arrow),
                 iconSize: 64.0,
-                onPressed: player.play,
+                onPressed: () {
+                  playerProvider.playSong();
+                  playerProvider.songSelected();
+                },
               );
             } else if (processingState != ProcessingState.completed) {
               return IconButton(
-                icon: const Icon(Icons.pause),
-                iconSize: 64.0,
-                onPressed: player.pause,
-              );
+                  icon: const Icon(Icons.pause),
+                  iconSize: 64.0,
+                  onPressed: () {
+                    playerProvider.pauseSong();
+                  });
             } else {
               return IconButton(
                 icon: const Icon(Icons.replay),
