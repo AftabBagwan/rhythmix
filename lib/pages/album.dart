@@ -70,7 +70,7 @@ class AlbumScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pop();
                         playerProvider.loadSong(songs[index].name);
-                        bottombarProvider.changePage(2);
+                        bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                       },
                       title: Text(

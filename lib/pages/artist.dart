@@ -94,7 +94,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
                             onTap: () {
                               Navigator.pop(context);
                               playerProvider.loadSong(song.name);
-                              bottombarProvider.changePage(2);
+                              bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },
                             contentPadding: EdgeInsets.zero,

@@ -112,7 +112,7 @@ class _SearchState extends State<Search> {
                       onTap: () {
                         playerProvider.loadSong(
                             searchSongResult.data.results[index].name);
-                        bottombarProvider.changePage(2);
+                        bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                       },
                       contentPadding: EdgeInsets.zero,

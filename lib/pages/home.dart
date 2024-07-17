@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
                               redirectTo: () {
                                 playerProvider.loadSong(homeProvider
                                     .trendingSongs[index].data.results[0].name);
-                                bottomNavProvider.changePage(2);
+                                bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },
                             );

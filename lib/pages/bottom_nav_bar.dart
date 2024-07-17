@@ -25,21 +25,15 @@ class BottomNavBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.search,
-            ),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.music_note,
             ),
             label: "Player",
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.search,
             ),
-            label: "Profile",
+            label: "Search",
           ),
         ],
         type: BottomNavigationBarType.fixed,
@@ -67,13 +61,8 @@ class BottomNavBar extends StatelessWidget {
         controller: provider.pageController,
         children: const [
           Home(),
-          Search(),
           Player(),
-          Scaffold(
-            body: Center(
-              child: Text("Profile"),
-            ),
-          ),
+          Search(),
         ],
       ),
     );
