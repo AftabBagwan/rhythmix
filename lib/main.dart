@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/pages/bottom_nav_bar.dart';
+import 'package:rhythmix/providers/artist_provider.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
@@ -25,7 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => HomeProvider(),
-          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ArtistProvider(),
         ),
       ],
       child: MaterialApp(

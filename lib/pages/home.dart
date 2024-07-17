@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        ArtistScreen(artist: artist[index]),
+                                        ArtistScreen(artistName: artist[index]),
                                   ),
                                 );
                               },
