@@ -11,7 +11,7 @@ class Player extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: Consumer<PlayerProvider>(
         builder: (context, playerProvider, child) {
           if (playerProvider.isLoading) {

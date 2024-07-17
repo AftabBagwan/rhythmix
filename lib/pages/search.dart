@@ -33,6 +33,7 @@ class _SearchState extends State<Search> {
     final bottombarProvider = Provider.of<BottomNavProvider>(context);
 
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
         child: Column(
@@ -139,11 +140,7 @@ class _SearchState extends State<Search> {
                         size: 32,
                       ),
                     );
-                    // return SongTile(
-                    //   songImage:
-                    //       searchSongResult.data.results[index].image.last.url,
-                    //   songName: searchSongResult.data.results[index].name,
-                    // );
+                    
                   },
                 ),
               ),

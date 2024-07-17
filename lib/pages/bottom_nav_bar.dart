@@ -65,13 +65,25 @@ class BottomNavBar extends StatelessWidget {
           ),
         ],
       ),
-      body: PageView(
-        controller: provider.pageController,
-        children: const [
-          Home(),
-          Player(),
-          Search(),
-        ],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.lightGreen,
+              Colors.transparent,
+            ],
+          ),
+        ),
+        child: PageView(
+          controller: provider.pageController,
+          children: const [
+            Home(),
+            Player(),
+            Search(),
+          ],
+        ),
       ),
     );
   }
