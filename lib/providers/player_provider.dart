@@ -14,6 +14,7 @@ class PlayerProvider extends ChangeNotifier {
   AudioPlayer get player => _player;
   SearchSong get currentSong => _currentSong;
   bool get isLoading => _isLoading;
+  bool get hasSelectedSong => _hasSelectedSong;
 
   PlayerProvider() {
     _init();
@@ -48,7 +49,7 @@ class PlayerProvider extends ChangeNotifier {
       );
       _isLoading = false;
       notifyListeners();
-      if(_hasSelectedSong) {
+      if (_hasSelectedSong) {
         _player.play();
       }
     } on PlayerException catch (e) {
@@ -56,6 +57,16 @@ class PlayerProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void playSong() {
+    _player.play();
+    notifyListeners();
+  }
+
+  void pauseSong() {
+    _player.pause();
+    notifyListeners();
   }
 
   void songSelected() {

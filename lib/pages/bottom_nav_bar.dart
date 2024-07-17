@@ -4,6 +4,7 @@ import 'package:rhythmix/pages/home.dart';
 import 'package:rhythmix/pages/player.dart';
 import 'package:rhythmix/pages/search.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/widgets/song_snack_bar.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -15,47 +16,53 @@ class BottomNavBar extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_filled,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SongSnackBar(),
+          BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_filled,
+                ),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.music_note,
+                ),
+                label: "Player",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search,
+                ),
+                label: "Search",
+              ),
+            ],
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: const Color(0x00ffffff),
+            iconSize: 36,
+            currentIndex: provider.currentIndex,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey,
+            onTap: (index) {
+              provider.changePage(index);
+            },
+            elevation: 0,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.white,
             ),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.music_note,
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 14,
             ),
-            label: "Player",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-            ),
-            label: "Search",
           ),
         ],
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0x00ffffff),
-        iconSize: 36,
-        currentIndex: provider.currentIndex,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        onTap: (index) {
-          provider.changePage(index);
-        },
-        elevation: 0,
-        selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: Colors.white,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 14,
-        ),
       ),
       body: PageView(
         controller: provider.pageController,
