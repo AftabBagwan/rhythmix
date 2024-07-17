@@ -15,11 +15,16 @@ class ArtistScreen extends StatefulWidget {
 }
 
 class _ArtistScreenState extends State<ArtistScreen> {
+  
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final artistProvider = Provider.of<ArtistProvider>(context, listen: false);
-    artistProvider.loadArtistSongs(widget.artistName);
+  void initState() {
+    super.initState();
+    // Using a post-frame callback to ensure it runs after the widget tree is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final artistProvider =
+          Provider.of<ArtistProvider>(context, listen: false);
+      artistProvider.loadArtistSongs(widget.artistName);
+    });
   }
 
   @override
