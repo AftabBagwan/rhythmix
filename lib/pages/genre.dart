@@ -29,6 +29,7 @@ class _GenreScreenState extends State<GenreScreen> {
     final bottombarProvider = Provider.of<BottomNavProvider>(context);
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -36,7 +37,7 @@ class _GenreScreenState extends State<GenreScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 20, top: 20),
+                padding: const EdgeInsets.only(left: 20, bottom: 20),
                 child: Text(
                   "Hot Hits ${widget.genre}",
                   style: const TextStyle(

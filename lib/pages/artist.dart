@@ -33,6 +33,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
     final bottombarProvider = Provider.of<BottomNavProvider>(context);
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

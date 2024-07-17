@@ -114,6 +114,8 @@ class _SearchState extends State<Search> {
                             searchSongResult.data.results[index].name);
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
+                        _searchController.clear();
+                        FocusScope.of(context).unfocus();
                       },
                       contentPadding: EdgeInsets.zero,
                       title: Text(searchSongResult.data.results[index].name),
