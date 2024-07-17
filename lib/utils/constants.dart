@@ -55,3 +55,16 @@ List<String> topAlbums = [
   "Ek Villain",
   "Teri Baaton Mein Aisa Uljha Jiya",
 ];
+
+List<String> trendingSongsList = [
+  "Sajni",
+  "Apna Bana Le",
+  "Tum Hi Ho",
+  "nadaaniyaan",
+  "Teri Jhuki Nazar",
+  "Zaalima",
+  "Mann Mera",
+  "Raataan Lambiyan",
+  "Sang Rahiyo",
+  "O Maahi",
+];

@@ -36,8 +36,7 @@ class PlayerProvider extends ChangeNotifier {
   Future<void> loadSong(String songName) async {
     _isLoading = true;
     notifyListeners();
-    
-    
+
     await Future.delayed(const Duration(milliseconds: 100));
 
     try {
@@ -57,6 +56,7 @@ class PlayerProvider extends ChangeNotifier {
 
   void songSelected() {
     _hasSelectedSong = true;
+    if (_isLoading) player.play();
   }
 
   Stream<PositionData> get positionDataStream =>

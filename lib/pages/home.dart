@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/pages/album.dart';
 import 'package:rhythmix/pages/artist.dart';
+import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/home_provider.dart';
-import 'package:rhythmix/services/remote.dart';
+import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
@@ -20,6 +20,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final bottomNavProvider = Provider.of<BottomNavProvider>(context);
+    final playerProvider = Provider.of<PlayerProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
@@ -60,15 +63,25 @@ class _HomeState extends State<Home> {
                       ),
                       SizedBox(
                         height: 200,
-                        child: ListView(
+                        child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          children: const [
-                            SongCard(),
-                            SongCard(),
-                            SongCard(),
-                            SongCard(),
-                            SongCard()
-                          ],
+                          itemCount: homeProvider.trendingSongs.length,
+                          itemBuilder: (context, index) {
+                            return SongCard(
+                              songImage: homeProvider.trendingSongs[index].data
+                                  .results[0].image.last.url,
+                              songName: homeProvider
+                                  .trendingSongs[index].data.results[0].name,
+                              description: homeProvider.trendingSongs[index]
+                                  .data.results[0].artists.primary.first.name,
+                              redirectTo: () {
+                                playerProvider.loadSong(homeProvider
+                                    .trendingSongs[index].data.results[0].name);
+                                bottomNavProvider.changePage(2);
+                                playerProvider.songSelected();
+                              },
+                            );
+                          },
                         ),
                       ),
                       Row(
