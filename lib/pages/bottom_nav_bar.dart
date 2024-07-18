@@ -78,6 +78,7 @@ class BottomNavBar extends StatelessWidget {
         ),
         child: PageView(
           controller: provider.pageController,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             const Home(),
             const Player(),

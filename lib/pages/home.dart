@@ -199,6 +199,10 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       ),
+                      if (playerProvider.hasSelectedSong)
+                        const SizedBox(
+                          height: 80,
+                        ),
                     ],
                   ),
                 );

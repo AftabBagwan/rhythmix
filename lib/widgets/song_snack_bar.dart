@@ -19,7 +19,7 @@ class SongSnackBar extends StatelessWidget {
         } else {
           return Container(
             height: 60,
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: AppColors.black87,
