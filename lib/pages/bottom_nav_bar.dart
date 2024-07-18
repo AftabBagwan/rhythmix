@@ -43,7 +43,7 @@ class BottomNavBar extends StatelessWidget {
               ),
             ],
             type: BottomNavigationBarType.fixed,
-            backgroundColor: const Color(0x00ffffff),
+            backgroundColor: AppColors.transparent, //const Color(0x00ffffff),
             iconSize: 36,
             currentIndex: provider.currentIndex,
             showSelectedLabels: true,
@@ -66,13 +66,13 @@ class BottomNavBar extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.lightGreen,
-              Colors.transparent,
+              AppColors.lightGreen,
+              AppColors.transparent,
             ],
           ),
         ),

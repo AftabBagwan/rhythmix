@@ -42,16 +42,6 @@ class _HomeState extends State<Home> {
               } else {
                 return Container(
                   padding: const EdgeInsets.only(left: 20.0),
-                  // decoration: const BoxDecoration(
-                  //   gradient: LinearGradient(
-                  //     begin: Alignment.topLeft,
-                  //     end: Alignment.bottomRight,
-                  //     colors: [
-                  //       Colors.lightGreen,
-                  //       Colors.transparent,
-                  //     ],
-                  //   ),
-                  // ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

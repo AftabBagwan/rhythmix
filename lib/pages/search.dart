@@ -51,8 +51,8 @@ class Search extends StatelessWidget {
                       fontSize: 16,
                     ),
                     prefixIconColor: AppColors.white,
-                    fillColor: Colors.grey.shade800,
-                    focusColor: Colors.grey.shade800,
+                    fillColor: AppColors.greyShade800,
+                    focusColor: AppColors.greyShade800,
                     filled: true,
                     border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
