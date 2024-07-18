@@ -82,6 +82,8 @@ class _HomeState extends State<Home> {
                               redirectTo: () {
                                 playerProvider.selectSong(homeProvider
                                     .trendingSongs[index].data.songs[0]);
+                                playerProvider.selectSongQueue(homeProvider
+                                    .trendingSongs[index].data.songs);
                                 bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },

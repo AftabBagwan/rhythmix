@@ -11,11 +11,15 @@ class PlayerProvider extends ChangeNotifier {
   late Song _currentSong;
   bool _isLoading = true;
   bool _hasSelectedSong = false;
+  late List<Song> _songQueue;
+  int _index = 0;
 
   AudioPlayer get player => _player;
   Song get currentSong => _currentSong;
   bool get isLoading => _isLoading;
   bool get hasSelectedSong => _hasSelectedSong;
+  List<Song> get songQueue => _songQueue;
+  int get index => _index;
 
   PlayerProvider() {
     _init();
@@ -32,6 +36,7 @@ class PlayerProvider extends ChangeNotifier {
 
     if (!_hasSelectedSong) {
       SearchSong defaultSong = await searchSong("alone");
+      _songQueue = defaultSong.data.songs;
       await selectSong(defaultSong.data.songs[0]);
     }
   }
@@ -46,8 +51,7 @@ class PlayerProvider extends ChangeNotifier {
       await _player.stop();
       _currentSong = song;
       await _player.setAudioSource(
-        AudioSource.uri(
-            Uri.parse(song.downloadUrl.last.url)),
+        AudioSource.uri(Uri.parse(song.downloadUrl.last.url)),
       );
       _isLoading = false;
       notifyListeners();
@@ -59,6 +63,14 @@ class PlayerProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void selectSongQueue(List<Song> songs) {
+    _songQueue = songs;
+  }
+
+  void setIndex(int newIndex) {
+    _index = newIndex;
   }
 
   void playSong() {

@@ -13,11 +13,15 @@ class PlayerControlButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final playerProvider = Provider.of<PlayerProvider>(context);
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      // mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Opens volume slider dialog
         IconButton(
-          icon: const Icon(Icons.volume_up),
+          icon: const Icon(
+            Icons.volume_up,
+            size: 32,
+          ),
           onPressed: () {
             showSliderDialog(
               context: context,
@@ -36,51 +40,96 @@ class PlayerControlButtons extends StatelessWidget {
         /// includes the playing/paused state and also the
         /// loading/buffering/ready state. Depending on the state we show the
         /// appropriate button or loading indicator.
-        StreamBuilder<PlayerState>(
-          stream: player.playerStateStream,
-          builder: (context, snapshot) {
-            final playerState = snapshot.data;
-            final processingState = playerState?.processingState;
-            final playing = playerState?.playing;
-            if (processingState == ProcessingState.loading ||
-                processingState == ProcessingState.buffering) {
-              return Container(
-                margin: const EdgeInsets.all(8.0),
-                width: 64.0,
-                height: 64.0,
-                child: const CircularProgressIndicator(),
-              );
-            } else if (playing != true) {
-              return IconButton(
-                icon: const Icon(Icons.play_circle),
-                iconSize: 64.0,
-                onPressed: () {
-                  playerProvider.playSong();
-                  playerProvider.songSelected();
-                },
-              );
-            } else if (processingState != ProcessingState.completed) {
-              return IconButton(
-                  icon: const Icon(Icons.pause_circle),
-                  iconSize: 64.0,
-                  onPressed: () {
-                    playerProvider.pauseSong();
-                  });
-            } else {
-              return IconButton(
-                icon: const Icon(Icons.replay),
-                iconSize: 64.0,
-                onPressed: () => player.seek(Duration.zero),
-              );
-            }
-          },
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                if (playerProvider.index > 0) {
+                  playerProvider.selectSong(
+                      playerProvider.songQueue[playerProvider.index - 1]);
+                  playerProvider.setIndex(playerProvider.index - 1);
+                }
+              },
+              icon: const Icon(
+                Icons.skip_previous,
+                size: 32,
+              ),
+            ),
+            StreamBuilder<PlayerState>(
+              stream: player.playerStateStream,
+              builder: (context, snapshot) {
+                final playerState = snapshot.data;
+                final processingState = playerState?.processingState;
+                final playing = playerState?.playing;
+                if (processingState == ProcessingState.loading ||
+                    processingState == ProcessingState.buffering) {
+                  return Container(
+                    margin: const EdgeInsets.all(8.0),
+                    width: 64.0,
+                    height: 64.0,
+                    child: const CircularProgressIndicator(),
+                  );
+                } else if (playing != true) {
+                  return IconButton(
+                    icon: const Icon(Icons.play_circle),
+                    iconSize: 64.0,
+                    onPressed: () {
+                      playerProvider.playSong();
+                      playerProvider.songSelected();
+                    },
+                  );
+                } else if (processingState != ProcessingState.completed) {
+                  return IconButton(
+                      icon: const Icon(Icons.pause_circle),
+                      iconSize: 64.0,
+                      onPressed: () {
+                        playerProvider.pauseSong();
+                      });
+                } else {
+                  if (playerProvider.index <
+                      playerProvider.songQueue.length - 1) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      playerProvider.selectSong(
+                          playerProvider.songQueue[playerProvider.index + 1]);
+                      playerProvider.setIndex(playerProvider.index + 1);
+                    });
+                  } else {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      playerProvider.selectSong(playerProvider.songQueue[0]);
+                      playerProvider.setIndex(0);
+                    });
+                  }
+                  return IconButton(
+                    icon: const Icon(Icons.replay),
+                    iconSize: 64.0,
+                    onPressed: () => player.seek(Duration.zero),
+                  );
+                }
+              },
+            ),
+            IconButton(
+              onPressed: () {
+                if (playerProvider.index <
+                    playerProvider.songQueue.length - 1) {
+                  playerProvider.selectSong(
+                      playerProvider.songQueue[playerProvider.index + 1]);
+                  playerProvider.setIndex(playerProvider.index + 1);
+                }
+              },
+              icon: const Icon(
+                Icons.skip_next,
+                size: 32,
+              ),
+            ),
+            // Opens speed slider dialog
+          ],
         ),
-        // Opens speed slider dialog
         StreamBuilder<double>(
           stream: player.speedStream,
           builder: (context, snapshot) => IconButton(
             icon: Text("${snapshot.data?.toStringAsFixed(1)}x",
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             onPressed: () {
               showSliderDialog(
                 context: context,

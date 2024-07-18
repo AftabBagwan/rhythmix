@@ -15,7 +15,6 @@ class ArtistScreen extends StatefulWidget {
 }
 
 class _ArtistScreenState extends State<ArtistScreen> {
-  
   @override
   void initState() {
     super.initState();
@@ -95,6 +94,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
                             onTap: () {
                               Navigator.pop(context);
                               playerProvider.selectSong(song);
+                              playerProvider.selectSongQueue(artistProvider.artistSongs!.data.songs);
                               bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },

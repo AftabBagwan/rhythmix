@@ -56,8 +56,7 @@ class AlbumScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "$releaseDate . $albumLangiage . $artist"
-                  .toUpperCase(),
+              "$releaseDate . $albumLangiage . $artist".toUpperCase(),
               style: TextStyle(
                 color: AppColors.grey,
                 fontSize: 16,
@@ -71,6 +70,7 @@ class AlbumScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pop();
                         playerProvider.selectSong(songs[index]);
+                        playerProvider.selectSongQueue(songs);
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                       },

@@ -97,55 +97,51 @@ class Search extends StatelessWidget {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    :
-              Expanded(
-                child: ListView.builder(
+                    : Expanded(
+                        child: ListView.builder(
                           itemCount: searchProvider
                               .searchSongResult?.data.songs.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        playerProvider.selectSong(
-                            searchProvider
-                                    .searchSongResult!
-                                    .data
-                                    .songs[index]
-                                    );
-                        bottombarProvider.changePage(1);
-                        playerProvider.songSelected();
-                        _searchController.clear();
-                        FocusScope.of(context).unfocus();
-                      },
-                      contentPadding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () {
+                                playerProvider.selectSong(searchProvider
+                                    .searchSongResult!.data.songs[index]);
+                                playerProvider.selectSongQueue(searchProvider
+                                    .searchSongResult!.data.songs);
+                                bottombarProvider.changePage(1);
+                                playerProvider.songSelected();
+                                _searchController.clear();
+                                FocusScope.of(context).unfocus();
+                              },
+                              contentPadding: EdgeInsets.zero,
                               title: Text(searchProvider
                                   .searchSongResult!.data.songs[index].name),
                               subtitle: Text(searchProvider.searchSongResult!
-                          .data.songs[index].artists.all.first.name),
-                      leading: Container(
-                        width: 55,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
+                                  .data.songs[index].artists.all.first.name),
+                              leading: Container(
+                                width: 55,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
                                       searchProvider.searchSongResult!.data
                                           .songs[index].image.last.url,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.play_circle,
+                                size: 32,
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      trailing: const Icon(
-                        Icons.play_circle,
-                        size: 32,
-                      ),
-                            );
-                  },
-                ),
-              ),
             ],
           );
-        }
-        ),
+        }),
       ),
     );
   }

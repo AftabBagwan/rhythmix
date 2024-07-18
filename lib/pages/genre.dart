@@ -55,8 +55,7 @@ class _GenreScreenState extends State<GenreScreen> {
                   } else {
                     return Expanded(
                       child: ListView.builder(
-                        itemCount:
-                            genreProvider.genreSongs?.data.songs.length,
+                        itemCount: genreProvider.genreSongs?.data.songs.length,
                         itemBuilder: (context, index) {
                           var song =
                               genreProvider.genreSongs?.data.songs[index];
@@ -64,6 +63,8 @@ class _GenreScreenState extends State<GenreScreen> {
                             onTap: () {
                               Navigator.pop(context);
                               playerProvider.selectSong(song);
+                              playerProvider.selectSongQueue(
+                                  genreProvider.genreSongs!.data.songs);
                               bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },
