@@ -21,7 +21,7 @@ class SearchSong {
     });
 
     factory SearchSong.fromJson(Map<String, dynamic> json) => SearchSong(
-        success: json["success"],
+        success: json["success"] ?? false,
         data: Data.fromJson(json["data"]),
     );
 

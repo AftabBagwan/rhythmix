@@ -29,11 +29,11 @@ class Song {
 
     factory Song.fromJson(Map<String, dynamic> json) => Song(
         id: json["id"] ?? "",
-        name: json["name"],
-        year: json["year"],
-        releaseDate: json["releaseDate"],
-        duration: json["duration"],
-        url: json["url"],
+        name: json["name"] ?? "",
+        year: json["year"] ?? "",
+        releaseDate: json["releaseDate"] ?? "",
+        duration: json["duration"] ?? 0,
+        url: json["url"] ?? "",
         album: Album.fromJson(json["album"]),
         language: json["language"] ?? "",
         artists: Artists.fromJson(json["artists"]),
@@ -68,9 +68,9 @@ class Album {
     });
 
     factory Album.fromJson(Map<String, dynamic> json) => Album(
-        id: json["id"],
-        name: json["name"],
-        url: json["url"],
+        id: json["id"] ?? "",
+        name: json["name"] ?? "",
+        url: json["url"] ?? "",
     );
 
     Map<String, dynamic> toJson() => {
@@ -122,12 +122,12 @@ class All {
     });
 
     factory All.fromJson(Map<String, dynamic> json) => All(
-        id: json["id"],
-        name: json["name"],
+        id: json["id"] ?? "",
+        name: json["name"] ?? "",
         role: roleValues.map[json["role"]]!,
         image: List<DownloadUrl>.from(json["image"].map((x) => DownloadUrl.fromJson(x))),
         type: allTypeValues.map[json["type"]]!,
-        url: json["url"],
+        url: json["url"] ?? "",
     );
 
     Map<String, dynamic> toJson() => {
@@ -151,7 +151,7 @@ class DownloadUrl {
 
     factory DownloadUrl.fromJson(Map<String, dynamic> json) => DownloadUrl(
         quality: qualityValues.map[json["quality"]]!,
-        url: json["url"],
+        url: json["url"] ?? "",
     );
 
     Map<String, dynamic> toJson() => {
