@@ -56,10 +56,10 @@ class _GenreScreenState extends State<GenreScreen> {
                     return Expanded(
                       child: ListView.builder(
                         itemCount:
-                            genreProvider.genreSongs?.data.results.length,
+                            genreProvider.genreSongs?.data.songs.length,
                         itemBuilder: (context, index) {
                           var song =
-                              genreProvider.genreSongs?.data.results[index];
+                              genreProvider.genreSongs?.data.songs[index];
                           return ListTile(
                             onTap: () {
                               Navigator.pop(context);

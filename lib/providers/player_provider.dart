@@ -45,7 +45,7 @@ class PlayerProvider extends ChangeNotifier {
       _currentSong = await searchSong(songName);
       await _player.setAudioSource(
         AudioSource.uri(
-            Uri.parse(_currentSong.data.results[0].downloadUrl.last.url)),
+            Uri.parse(_currentSong.data.songs[0].downloadUrl.last.url)),
       );
       _isLoading = false;
       notifyListeners();

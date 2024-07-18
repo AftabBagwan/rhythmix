@@ -74,14 +74,14 @@ class _HomeState extends State<Home> {
                           itemBuilder: (context, index) {
                             return SongCard(
                               songImage: homeProvider.trendingSongs[index].data
-                                  .results[0].image.last.url,
+                                  .songs[0].image.last.url,
                               songName: homeProvider
-                                  .trendingSongs[index].data.results[0].name,
+                                  .trendingSongs[index].data.songs[0].name,
                               description: homeProvider.trendingSongs[index]
-                                  .data.results[0].artists.primary.first.name,
+                                  .data.songs[0].artists.primary.first.name,
                               redirectTo: () {
                                 playerProvider.loadSong(homeProvider
-                                    .trendingSongs[index].data.results[0].name);
+                                    .trendingSongs[index].data.songs[0].name);
                                 bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },
@@ -110,11 +110,11 @@ class _HomeState extends State<Home> {
                           itemBuilder: (context, index) {
                             return SongCard(
                               songImage: homeProvider.topAlbumSongs[index].data
-                                  .results[0].image.last.url,
+                                  .songs[0].image.last.url,
                               songName: homeProvider.topAlbumSongs[index].data
-                                  .results[0].album.name,
+                                  .songs[0].album.name,
                               description: homeProvider.topAlbumSongs[index]
-                                  .data.results[0].artists.primary.first.name,
+                                  .data.songs[0].artists.primary.first.name,
                               redirectTo: () {
                                 Navigator.push(
                                   context,
@@ -123,36 +123,36 @@ class _HomeState extends State<Home> {
                                       albumImage: homeProvider
                                           .topAlbumSongs[index]
                                           .data
-                                          .results[0]
+                                          .songs[0]
                                           .image
                                           .last
                                           .url,
                                       albumName: homeProvider
                                           .topAlbumSongs[index]
                                           .data
-                                          .results[0]
+                                          .songs[0]
                                           .album
                                           .name,
                                       releaseDate: homeProvider
                                           .topAlbumSongs[index]
                                           .data
-                                          .results[0]
+                                          .songs[0]
                                           .year,
                                       albumLangiage: homeProvider
                                           .topAlbumSongs[index]
                                           .data
-                                          .results[0]
+                                          .songs[0]
                                           .language,
                                       artist: homeProvider
                                           .topAlbumSongs[index]
                                           .data
-                                          .results[0]
+                                          .songs[0]
                                           .artists
                                           .primary
                                           .first
                                           .name,
                                       songs: homeProvider
-                                          .topAlbumSongs[index].data.results,
+                                          .topAlbumSongs[index].data.songs,
                                     ),
                                   ),
                                 );

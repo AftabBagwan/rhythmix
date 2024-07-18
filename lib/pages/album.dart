@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
@@ -19,7 +20,7 @@ class AlbumScreen extends StatelessWidget {
   final String releaseDate;
   final String albumLangiage;
   final String artist;
-  final List<Result> songs;
+  final List<Song> songs;
 
   @override
   Widget build(BuildContext context) {

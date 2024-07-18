@@ -87,10 +87,10 @@ class _ArtistScreenState extends State<ArtistScreen> {
                     } else {
                       return ListView.builder(
                         itemCount:
-                            artistProvider.artistSongs?.data.results.length,
+                            artistProvider.artistSongs?.data.songs.length,
                         itemBuilder: (context, index) {
                           final song =
-                              artistProvider.artistSongs?.data.results[index];
+                              artistProvider.artistSongs?.data.songs[index];
                           return ListTile(
                             onTap: () {
                               Navigator.pop(context);

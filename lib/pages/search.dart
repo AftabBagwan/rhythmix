@@ -101,7 +101,7 @@ class Search extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                           itemCount: searchProvider
-                              .searchSongResult?.data.results.length,
+                              .searchSongResult?.data.songs.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
@@ -109,7 +109,7 @@ class Search extends StatelessWidget {
                             searchProvider
                                     .searchSongResult!
                                     .data
-                                    .results[index]
+                                    .songs[index]
                                     .name);
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
@@ -118,16 +118,16 @@ class Search extends StatelessWidget {
                       },
                       contentPadding: EdgeInsets.zero,
                               title: Text(searchProvider
-                                  .searchSongResult!.data.results[index].name),
+                                  .searchSongResult!.data.songs[index].name),
                               subtitle: Text(searchProvider.searchSongResult!
-                          .data.results[index].artists.all.first.name),
+                          .data.songs[index].artists.all.first.name),
                       leading: Container(
                         width: 55,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
                                       searchProvider.searchSongResult!.data
-                                          .results[index].image.last.url,
+                                          .songs[index].image.last.url,
                             ),
                             fit: BoxFit.cover,
                           ),
