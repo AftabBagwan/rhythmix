@@ -13,6 +13,8 @@ class AlbumScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final playerProvider = Provider.of<PlayerProvider>(context);
     final bottombarProvider = Provider.of<BottomNavProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(),
@@ -23,8 +25,8 @@ class AlbumScreen extends StatelessWidget {
           children: [
             Center(
               child: Container(
-                height: 200,
-                width: 200,
+                height: screenHeight * (1 / 4), //200
+                width: screenWidth * (0.55), //200
                 margin: const EdgeInsets.only(bottom: 40),
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -56,24 +58,23 @@ class AlbumScreen extends StatelessWidget {
                 itemCount: songs.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        playerProvider.selectSong(songs[index]);
-                        playerProvider.selectSongQueue(songs);
-                        bottombarProvider.changePage(1);
-                        playerProvider.songSelected();
-                      },
-                      title: Text(
-                        songs[index].name,
-                      ),
-                      subtitle: Text(
-                        overflow: TextOverflow.ellipsis,
-                        "${songs[index].artists.all.first.name} , ${songs[index].artists.all.last.name}",
-                      ),
-                      trailing: const Icon(
-                        Icons.play_circle,
-                        size: 32,
-                      ));
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      playerProvider.selectSong(songs[index]);
+                      playerProvider.selectSongQueue(songs);
+                      bottombarProvider.changePage(1);
+                      playerProvider.songSelected();
+                    },
+                    title: Text(songs[index].name),
+                    subtitle: Text(
+                      overflow: TextOverflow.ellipsis,
+                      "${songs[index].artists.all.first.name} , ${songs[index].artists.all.last.name}",
+                    ),
+                    trailing: const Icon(
+                      Icons.play_circle,
+                      size: 32,
+                    ),
+                  );
                 },
               ),
             ),

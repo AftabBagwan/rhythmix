@@ -29,6 +29,8 @@ class _ArtistScreenState extends State<ArtistScreen> {
   Widget build(BuildContext context) {
     final playerProvider = Provider.of<PlayerProvider>(context);
     final bottombarProvider = Provider.of<BottomNavProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(),
@@ -40,8 +42,8 @@ class _ArtistScreenState extends State<ArtistScreen> {
             children: [
               Center(
                 child: Container(
-                  height: 200,
-                  width: 200,
+                  height: screenHeight * (1 / 4), //200
+                  width: screenWidth * (0.55), //200
                   margin: const EdgeInsets.only(top: 20, bottom: 20),
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -93,7 +95,8 @@ class _ArtistScreenState extends State<ArtistScreen> {
                             onTap: () {
                               Navigator.pop(context);
                               playerProvider.selectSong(song);
-                              playerProvider.selectSongQueue(artistProvider.artistSongs!.data.songs);
+                              playerProvider.selectSongQueue(
+                              artistProvider.artistSongs!.data.songs);
                               bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },

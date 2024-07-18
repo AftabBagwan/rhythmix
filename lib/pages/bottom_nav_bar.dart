@@ -24,21 +24,15 @@ class BottomNavBar extends StatelessWidget {
           BottomNavigationBar(
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_filled,
-                ),
+                icon: Icon(Icons.home_filled),
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.music_note,
-                ),
+                icon: Icon(Icons.music_note),
                 label: "Player",
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.search,
-                ),
+                icon: Icon(Icons.search),
                 label: "Search",
               ),
             ],
@@ -59,9 +53,7 @@ class BottomNavBar extends StatelessWidget {
               fontSize: 16,
               color: AppColors.white,
             ),
-            unselectedLabelStyle: const TextStyle(
-              fontSize: 14,
-            ),
+            unselectedLabelStyle: const TextStyle(fontSize: 14),
           ),
         ],
       ),

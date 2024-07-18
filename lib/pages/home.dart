@@ -12,18 +12,14 @@ import 'package:rhythmix/widgets/album_card.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
 import 'package:rhythmix/widgets/song_card.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final bottomNavProvider = Provider.of<BottomNavProvider>(context);
     final playerProvider = Provider.of<PlayerProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
@@ -36,10 +32,7 @@ class _HomeState extends State<Home> {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.white,
-                    ),
-                  ),
+                      child: CircularProgressIndicator(color: AppColors.white)),
                 );
               } else {
                 return Container(
@@ -59,7 +52,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(
-                        height: 200,
+                        height: screenHeight * (1 / 4), //200,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: homeProvider.trendingSongs.length,
@@ -68,7 +61,8 @@ class _HomeState extends State<Home> {
                             return SongCard(
                               redirectTo: () {
                                 playerProvider.selectSong(song);
-                                playerProvider.selectSongQueue(homeProvider.trendingSongs);
+                                playerProvider.selectSongQueue(
+                                    homeProvider.trendingSongs);
                                 bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },
@@ -86,7 +80,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(
-                        height: 200,
+                        height: screenHeight * (1 / 4), //200,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: homeProvider.topAlbumSongs.length,
@@ -116,7 +110,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(
-                        height: 180,
+                        height: screenHeight * (0.225), //180,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: artist.length,
@@ -139,8 +133,8 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       if (playerProvider.hasSelectedSong)
-                        const SizedBox(
-                          height: 80,
+                        SizedBox(
+                          height: screenHeight * 0.1, //80,
                         ),
                     ],
                   ),

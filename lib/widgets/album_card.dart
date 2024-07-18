@@ -9,12 +9,14 @@ class AlbumCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: redirectTo,
       child: Container(
         margin: const EdgeInsets.only(top: 20, right: 20),
-        width: 120,
-        height: 160,
+        width: screenWidth * (1 / 3), //120,
+        height: screenHeight * 0.2, //160,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(
             Radius.circular(20),
@@ -24,8 +26,8 @@ class AlbumCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 120,
-              height: 120,
+              width: screenWidth * (1 / 3), //120,
+              height: screenHeight * 0.15, //120,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),

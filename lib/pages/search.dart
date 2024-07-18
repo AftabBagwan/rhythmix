@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/providers/search_provider.dart';
@@ -47,18 +48,14 @@ class Search extends StatelessWidget {
                       size: 32,
                     ),
                     hintText: "Artist,Song or Podcast",
-                    hintStyle: const TextStyle(
-                      fontSize: 16,
-                    ),
+                    hintStyle: const TextStyle(fontSize: 16),
                     prefixIconColor: AppColors.white,
                     fillColor: AppColors.greyShade800,
                     focusColor: AppColors.greyShade800,
                     filled: true,
                     border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
                   onChanged: searchProvider.searchKeyword,
@@ -94,38 +91,33 @@ class Search extends StatelessWidget {
               if (_searchController.text.isNotEmpty)
                 (searchProvider.searchSongResult == null ||
                         searchProvider.loading)
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? const Center(child: CircularProgressIndicator())
                     : Expanded(
                         child: ListView.builder(
                           itemCount: searchProvider
                               .searchSongResult?.data.songs.length,
                           itemBuilder: (context, index) {
+                            List<Song> songs =
+                                searchProvider.searchSongResult!.data.songs;
                             return ListTile(
                               onTap: () {
-                                playerProvider.selectSong(searchProvider
-                                    .searchSongResult!.data.songs[index]);
-                                playerProvider.selectSongQueue(searchProvider
-                                    .searchSongResult!.data.songs);
+                                playerProvider.selectSong(songs[index]);
+                                playerProvider.selectSongQueue(songs);
                                 bottombarProvider.changePage(1);
                                 playerProvider.songSelected();
                                 _searchController.clear();
                                 FocusScope.of(context).unfocus();
                               },
                               contentPadding: EdgeInsets.zero,
-                              title: Text(searchProvider
-                                  .searchSongResult!.data.songs[index].name),
-                              subtitle: Text(searchProvider.searchSongResult!
-                                  .data.songs[index].artists.all.first.name),
+                              title: Text(songs[index].name),
+                              subtitle:
+                                  Text(songs[index].artists.all.first.name),
                               leading: Container(
                                 width: 55,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      searchProvider.searchSongResult!.data
-                                          .songs[index].image.last.url,
-                                    ),
+                                        songs[index].image.last.url),
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius: BorderRadius.circular(10),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/common.dart';
@@ -17,6 +18,7 @@ class Player extends StatelessWidget {
           if (playerProvider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {
+            Song currentSong = playerProvider.currentSong;
             return SafeArea(
               child: SingleChildScrollView(
                 child: Container(
@@ -29,7 +31,7 @@ class Player extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(top: 10.0, bottom: 20.0),
                           child: Text(
-                            playerProvider.currentSong.name,
+                            currentSong.name,
                             softWrap: false,
                             style: const TextStyle(
                               fontSize: 24,
@@ -44,8 +46,7 @@ class Player extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(playerProvider
-                                .currentSong.image.last.url),
+                            image: NetworkImage(currentSong.image.last.url),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: const BorderRadius.all(
@@ -54,15 +55,14 @@ class Player extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        playerProvider.currentSong.name,
+                        currentSong.name,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        playerProvider.currentSong.artists
-                            .primary.first.name,
+                        currentSong.artists.primary.first.name,
                         style: TextStyle(
                           fontSize: 16,
                           color: AppColors.grey,
@@ -81,8 +81,7 @@ class Player extends StatelessWidget {
                           );
                         },
                       ),
-                      Center(
-                          child: PlayerControlButtons(playerProvider.player)),
+                      Center(child: PlayerControlButtons(playerProvider.player)),
                     ],
                   ),
                 ),

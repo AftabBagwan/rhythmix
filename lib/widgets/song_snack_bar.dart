@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
@@ -17,8 +18,9 @@ class SongSnackBar extends StatelessWidget {
             !playerProvider.hasSelectedSong) {
           return const SizedBox.shrink();
         } else {
+          Song currentSong = playerProvider.currentSong;
           return Container(
-            height: 60,
+            height: MediaQuery.of(context).size.height * 0.075, //60,
             margin: const EdgeInsets.symmetric(horizontal: 10),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
@@ -32,10 +34,7 @@ class SongSnackBar extends StatelessWidget {
                   width: 50,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                        playerProvider
-                            .currentSong.image.last.url,
-                      ),
+                      image: NetworkImage(currentSong.image.last.url),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(5),
@@ -48,7 +47,7 @@ class SongSnackBar extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          playerProvider.currentSong.name,
+                          currentSong.name,
                           style: TextStyle(
                               color: AppColors.white,
                               fontSize: 16,
@@ -57,7 +56,7 @@ class SongSnackBar extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          playerProvider.currentSong.artists.primary.first.name,
+                          currentSong.artists.primary.first.name,
                           style:
                               TextStyle(color: AppColors.white, fontSize: 14),
                         ),
