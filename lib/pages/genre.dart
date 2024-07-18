@@ -16,7 +16,6 @@ class _GenreScreenState extends State<GenreScreen> {
   @override
   void initState() {
     super.initState();
-    // Using a post-frame callback to ensure it runs after the widget tree is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final genreProvider = Provider.of<GenreProvider>(context, listen: false);
       genreProvider.loadGenreSongs(widget.genre);

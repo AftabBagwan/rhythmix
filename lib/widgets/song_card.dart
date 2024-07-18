@@ -3,12 +3,14 @@ import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/utils/colors.dart';
 
 class SongCard extends StatelessWidget {
-  const SongCard({super.key,required this.redirectTo, required this.song});
+  const SongCard({super.key, required this.redirectTo, required this.song});
   final void Function() redirectTo;
   final Song song;
 
   @override
   Widget build(BuildContext context) {
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: redirectTo,
       child: Container(
@@ -16,10 +18,7 @@ class SongCard extends StatelessWidget {
         width: 120,
         height: 160,
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,13 +26,9 @@ class SongCard extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
                 image: DecorationImage(
-                  image: NetworkImage(
-                    song.image.last.url ?? "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
-                  ),
+                  image: NetworkImage(song.image.last.url),
                   fit: BoxFit.cover,
                 ),
               ),

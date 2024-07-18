@@ -12,9 +12,7 @@ class GenreCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => GenreScreen(genre: genreName),
-          ),
+          MaterialPageRoute(builder: (context) => GenreScreen(genre: genreName)),
         );
       },
       child: Container(

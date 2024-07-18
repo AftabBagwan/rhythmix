@@ -16,7 +16,6 @@ class PlayerControlButtons extends StatelessWidget {
       // mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Opens volume slider dialog
         IconButton(
           icon: const Icon(
             Icons.volume_up,

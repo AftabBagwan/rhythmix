@@ -68,3 +68,5 @@ List<String> trendingSongsList = [
   "Sang Rahiyo",
   "O Maahi",
 ];
+
+String dummyImage = "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp";

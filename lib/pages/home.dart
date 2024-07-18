@@ -77,18 +77,13 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Top Albums",
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "Top Albums",
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(
                         height: 200,
@@ -112,18 +107,13 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Popular Artists",
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "Popular Artists",
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(
                         height: 180,
