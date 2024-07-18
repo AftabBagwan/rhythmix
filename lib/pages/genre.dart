@@ -63,7 +63,7 @@ class _GenreScreenState extends State<GenreScreen> {
                           return ListTile(
                             onTap: () {
                               Navigator.pop(context);
-                              playerProvider.loadSong(song.name);
+                              playerProvider.selectSong(song);
                               bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },

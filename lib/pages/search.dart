@@ -105,12 +105,12 @@ class Search extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
-                        playerProvider.loadSong(
+                        playerProvider.selectSong(
                             searchProvider
                                     .searchSongResult!
                                     .data
                                     .songs[index]
-                                    .name);
+                                    );
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                         _searchController.clear();

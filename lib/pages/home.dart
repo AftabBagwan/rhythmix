@@ -80,8 +80,8 @@ class _HomeState extends State<Home> {
                               description: homeProvider.trendingSongs[index]
                                   .data.songs[0].artists.primary.first.name,
                               redirectTo: () {
-                                playerProvider.loadSong(homeProvider
-                                    .trendingSongs[index].data.songs[0].name);
+                                playerProvider.selectSong(homeProvider
+                                    .trendingSongs[index].data.songs[0]);
                                 bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },

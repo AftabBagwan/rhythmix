@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:rhythmix/models/search_song.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/services/remote.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PlayerProvider extends ChangeNotifier {
   final AudioPlayer _player = AudioPlayer();
-  late SearchSong _currentSong;
+  late Song _currentSong;
   bool _isLoading = true;
   bool _hasSelectedSong = false;
 
   AudioPlayer get player => _player;
-  SearchSong get currentSong => _currentSong;
+  Song get currentSong => _currentSong;
   bool get isLoading => _isLoading;
   bool get hasSelectedSong => _hasSelectedSong;
 
@@ -30,11 +31,12 @@ class PlayerProvider extends ChangeNotifier {
     });
 
     if (!_hasSelectedSong) {
-      await loadSong("alone");
+      SearchSong defaultSong = await searchSong("alone");
+      await selectSong(defaultSong.data.songs[0]);
     }
   }
 
-  Future<void> loadSong(String songName) async {
+  Future<void> selectSong(Song song) async {
     _isLoading = true;
     notifyListeners();
 
@@ -42,10 +44,10 @@ class PlayerProvider extends ChangeNotifier {
 
     try {
       await _player.stop();
-      _currentSong = await searchSong(songName);
+      _currentSong = song;
       await _player.setAudioSource(
         AudioSource.uri(
-            Uri.parse(_currentSong.data.songs[0].downloadUrl.last.url)),
+            Uri.parse(song.downloadUrl.last.url)),
       );
       _isLoading = false;
       notifyListeners();

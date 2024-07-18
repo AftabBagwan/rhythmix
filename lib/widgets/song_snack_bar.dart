@@ -34,7 +34,7 @@ class SongSnackBar extends StatelessWidget {
                     image: DecorationImage(
                       image: NetworkImage(
                         playerProvider
-                            .currentSong.data.songs[0].image.last.url,
+                            .currentSong.image.last.url,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -46,14 +46,14 @@ class SongSnackBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      playerProvider.currentSong.data.songs[0].name,
+                      playerProvider.currentSong.name,
                       style: TextStyle(
                           color: AppColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      playerProvider.currentSong.data.songs[0].artists.primary
+                      playerProvider.currentSong.artists.primary
                           .first.name,
                       style: TextStyle(color: AppColors.white, fontSize: 14),
                     ),

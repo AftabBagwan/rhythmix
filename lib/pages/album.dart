@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
@@ -71,7 +70,7 @@ class AlbumScreen extends StatelessWidget {
                   return ListTile(
                       onTap: () {
                         Navigator.of(context).pop();
-                        playerProvider.loadSong(songs[index].name);
+                        playerProvider.selectSong(songs[index]);
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                       },

@@ -29,7 +29,7 @@ class Player extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(top: 10.0, bottom: 20.0),
                           child: Text(
-                            playerProvider.currentSong.data.songs[0].name,
+                            playerProvider.currentSong.name,
                             softWrap: false,
                             style: const TextStyle(
                               fontSize: 24,
@@ -45,7 +45,7 @@ class Player extends StatelessWidget {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(playerProvider
-                                .currentSong.data.songs[0].image.last.url),
+                                .currentSong.image.last.url),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: const BorderRadius.all(
@@ -54,14 +54,14 @@ class Player extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        playerProvider.currentSong.data.songs[0].name,
+                        playerProvider.currentSong.name,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        playerProvider.currentSong.data.songs[0].artists
+                        playerProvider.currentSong.artists
                             .primary.first.name,
                         style: TextStyle(
                           fontSize: 16,
