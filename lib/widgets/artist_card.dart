@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 class ArtistCard extends StatelessWidget {
   const ArtistCard({super.key, required this.artistImageUrl});
@@ -10,8 +11,8 @@ class ArtistCard extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10.0),
       child: CircleAvatar(
         radius: 72,
-        backgroundImage: NetworkImage(
-            artistImageUrl),
+        backgroundImage: NetworkImage(artistImageUrl),
+        backgroundColor: AppColors.transparent,
       ),
     );
   }

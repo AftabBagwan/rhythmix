@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/utils/colors.dart';
 
-class SongCard extends StatelessWidget {
-  const SongCard({super.key,required this.redirectTo, required this.song});
+class AlbumCard extends StatelessWidget {
+  const AlbumCard({super.key, required this.redirectTo, required this.album});
   final void Function() redirectTo;
-  final Song song;
+  final Song album;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class SongCard extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                    song.image.last.url ?? "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
+                    album.image.last.url,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -41,7 +41,7 @@ class SongCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
               child: Text(
-                song.name,
+                album.album.name,
                 softWrap: false,
                 style: TextStyle(
                   fontSize: 14,
@@ -51,7 +51,7 @@ class SongCard extends StatelessWidget {
               ),
             ),
             Text(
-              song.artists.primary.first.name,
+              album.artists.primary.first.name,
               style: TextStyle(
                 fontSize: 10,
                 color: AppColors.grey,

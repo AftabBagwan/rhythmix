@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/pages/album.dart';
 import 'package:rhythmix/pages/artist.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
@@ -7,6 +8,7 @@ import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
+import 'package:rhythmix/widgets/album_card.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
 import 'package:rhythmix/widgets/song_card.dart';
 
@@ -62,21 +64,15 @@ class _HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           itemCount: homeProvider.trendingSongs.length,
                           itemBuilder: (context, index) {
+                            Song song = homeProvider.trendingSongs[index];
                             return SongCard(
-                              songImage: homeProvider.trendingSongs[index].data
-                                  .songs[0].image.last.url,
-                              songName: homeProvider
-                                  .trendingSongs[index].data.songs[0].name,
-                              description: homeProvider.trendingSongs[index]
-                                  .data.songs[0].artists.primary.first.name,
                               redirectTo: () {
-                                playerProvider.selectSong(homeProvider
-                                    .trendingSongs[index].data.songs[0]);
-                                playerProvider.selectSongQueue(homeProvider
-                                    .trendingSongs[index].data.songs);
+                                playerProvider.selectSong(song);
+                                playerProvider.selectSongQueue(homeProvider.trendingSongs);
                                 bottomNavProvider.changePage(1);
                                 playerProvider.songSelected();
                               },
+                              song: song,
                             );
                           },
                         ),
@@ -100,51 +96,14 @@ class _HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           itemCount: homeProvider.topAlbumSongs.length,
                           itemBuilder: (context, index) {
-                            return SongCard(
-                              songImage: homeProvider.topAlbumSongs[index].data
-                                  .songs[0].image.last.url,
-                              songName: homeProvider.topAlbumSongs[index].data
-                                  .songs[0].album.name,
-                              description: homeProvider.topAlbumSongs[index]
-                                  .data.songs[0].artists.primary.first.name,
+                            return AlbumCard(
+                              album: homeProvider.topAlbumSongs[index][0],
                               redirectTo: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AlbumScreen(
-                                      albumImage: homeProvider
-                                          .topAlbumSongs[index]
-                                          .data
-                                          .songs[0]
-                                          .image
-                                          .last
-                                          .url,
-                                      albumName: homeProvider
-                                          .topAlbumSongs[index]
-                                          .data
-                                          .songs[0]
-                                          .album
-                                          .name,
-                                      releaseDate: homeProvider
-                                          .topAlbumSongs[index]
-                                          .data
-                                          .songs[0]
-                                          .year,
-                                      albumLangiage: homeProvider
-                                          .topAlbumSongs[index]
-                                          .data
-                                          .songs[0]
-                                          .language,
-                                      artist: homeProvider
-                                          .topAlbumSongs[index]
-                                          .data
-                                          .songs[0]
-                                          .artists
-                                          .primary
-                                          .first
-                                          .name,
-                                      songs: homeProvider
-                                          .topAlbumSongs[index].data.songs,
+                                      songs: homeProvider.topAlbumSongs[index],
                                     ),
                                   ),
                                 );

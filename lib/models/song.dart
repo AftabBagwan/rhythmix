@@ -151,7 +151,7 @@ class DownloadUrl {
 
     factory DownloadUrl.fromJson(Map<String, dynamic> json) => DownloadUrl(
         quality: qualityValues.map[json["quality"]]!,
-        url: json["url"] ?? "",
+        url: json["url"],
     );
 
     Map<String, dynamic> toJson() => {

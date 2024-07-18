@@ -6,19 +6,7 @@ import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 
 class AlbumScreen extends StatelessWidget {
-  const AlbumScreen(
-      {super.key,
-      required this.albumImage,
-      required this.albumName,
-      required this.releaseDate,
-      required this.albumLangiage,
-      required this.artist,
-      required this.songs});
-  final String albumImage;
-  final String albumName;
-  final String releaseDate;
-  final String albumLangiage;
-  final String artist;
+  const AlbumScreen({super.key, required this.songs});
   final List<Song> songs;
 
   @override
@@ -40,7 +28,7 @@ class AlbumScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 40),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(albumImage),
+                    image: NetworkImage(songs[0].image.last.url),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -48,7 +36,7 @@ class AlbumScreen extends StatelessWidget {
               ),
             ),
             Text(
-              albumName,
+              songs[0].album.name,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 24,
@@ -56,7 +44,8 @@ class AlbumScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "$releaseDate . $albumLangiage . $artist".toUpperCase(),
+              "${songs[0].year} . ${songs[0].language} . ${songs[0].artists.primary.first.name}"
+                  .toUpperCase(),
               style: TextStyle(
                 color: AppColors.grey,
                 fontSize: 16,
