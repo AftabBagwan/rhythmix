@@ -10,6 +10,10 @@ class ArtistProvider extends ChangeNotifier {
   SearchSong? get artistSongs => _artistSongs;
 
   loadArtistSongs(String artist) async {
+    
+    _isLoading = true;
+    notifyListeners();
+
     SearchSong result = await searchSong(artist);
     _artistSongs = result;
     _isLoading = false;
