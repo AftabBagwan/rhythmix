@@ -6,6 +6,7 @@ import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/genre_provider.dart';
 import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
+import 'package:rhythmix/providers/search_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 
 void main() {
@@ -19,21 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => BottomNavProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => PlayerProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => HomeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ArtistProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => GenreProvider(),
-        ),
+        ChangeNotifierProvider(create: (context) => BottomNavProvider()),
+        ChangeNotifierProvider(create: (context) => PlayerProvider()),
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => ArtistProvider()),
+        ChangeNotifierProvider(create: (context) => GenreProvider()),
+        ChangeNotifierProvider(create: (context) => SearchProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

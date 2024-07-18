@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
-import 'package:rhythmix/services/remote.dart';
+import 'package:rhythmix/providers/search_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/genre_card.dart';
 
-class Search extends StatefulWidget {
-  const Search({super.key});
-
-  @override
-  State<Search> createState() => _SearchState();
-}
-
-class _SearchState extends State<Search> {
+class Search extends StatelessWidget {
+  Search({super.key});
   final TextEditingController _searchController = TextEditingController();
-  late SearchSong searchSongResult;
-
-  void searchKeyword(String query) async {
-    var result = await searchSong(query);
-    if (!mounted) return;
-    setState(() {
-      searchSongResult = result;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,99 +20,114 @@ class _SearchState extends State<Search> {
       backgroundColor: AppColors.primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Search",
-              style: TextStyle(
-                fontSize: 22,
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24.0),
-              child: TextField(
-                keyboardType: TextInputType.text,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-                controller: _searchController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    size: 32,
-                  ),
-                  hintText: "Artist,Song or Podcast",
-                  hintStyle: const TextStyle(
-                    fontSize: 16,
-                  ),
-                  prefixIconColor: AppColors.white,
-                  fillColor: Colors.grey.shade800,
-                  focusColor: Colors.grey.shade800,
-                  filled: true,
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                ),
-                onChanged: searchKeyword,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Text(
-                "Browse all",
+        child:
+            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Search",
                 style: TextStyle(
                   fontSize: 22,
                   color: AppColors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            if (_searchController.text.isEmpty)
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 3 / 2,
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: const TextStyle(
+                    fontSize: 16,
                   ),
-                  itemCount: genreList.length,
-                  itemBuilder: (context, index) {
-                    return GenreCard(
-                      genreName: genreList[index],
-                    );
-                  },
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      size: 32,
+                    ),
+                    hintText: "Artist,Song or Podcast",
+                    hintStyle: const TextStyle(
+                      fontSize: 16,
+                    ),
+                    prefixIconColor: AppColors.white,
+                    fillColor: Colors.grey.shade800,
+                    focusColor: Colors.grey.shade800,
+                    filled: true,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                  onChanged: searchProvider.searchKeyword,
                 ),
               ),
-            if (_searchController.text.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  "Browse all",
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              if (_searchController.text.isEmpty)
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 3 / 2,
+                    ),
+                    itemCount: genreList.length,
+                    itemBuilder: (context, index) {
+                      return GenreCard(
+                        genreName: genreList[index],
+                      );
+                    },
+                  ),
+                ),
+              if (_searchController.text.isNotEmpty)
+                (searchProvider.searchSongResult == null ||
+                        searchProvider.loading)
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    :
               Expanded(
                 child: ListView.builder(
-                  itemCount: searchSongResult.data.results.length,
+                          itemCount: searchProvider
+                              .searchSongResult?.data.results.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                       onTap: () {
                         playerProvider.loadSong(
-                            searchSongResult.data.results[index].name);
+                            searchProvider
+                                    .searchSongResult!
+                                    .data
+                                    .results[index]
+                                    .name);
                         bottombarProvider.changePage(1);
                         playerProvider.songSelected();
                         _searchController.clear();
                         FocusScope.of(context).unfocus();
                       },
                       contentPadding: EdgeInsets.zero,
-                      title: Text(searchSongResult.data.results[index].name),
-                      subtitle: Text(searchSongResult
+                              title: Text(searchProvider
+                                  .searchSongResult!.data.results[index].name),
+                              subtitle: Text(searchProvider.searchSongResult!
                           .data.results[index].artists.all.first.name),
                       leading: Container(
                         width: 55,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
-                              searchSongResult
-                                  .data.results[index].image.last.url,
+                                      searchProvider.searchSongResult!.data
+                                          .results[index].image.last.url,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -139,12 +138,13 @@ class _SearchState extends State<Search> {
                         Icons.play_circle,
                         size: 32,
                       ),
-                    );
-                    
+                            );
                   },
                 ),
               ),
-          ],
+            ],
+          );
+        }
         ),
       ),
     );
