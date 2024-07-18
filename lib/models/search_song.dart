@@ -7,20 +7,21 @@ import 'dart:convert';
 
 import 'package:rhythmix/models/song.dart';
 
-SearchSong searchSongFromJson(String str) => SearchSong.fromJson(json.decode(str));
+SearchResult searchSongFromJson(String str) =>
+    SearchResult.fromJson(json.decode(str));
 
-String searchSongToJson(SearchSong data) => json.encode(data.toJson());
+String searchSongToJson(SearchResult data) => json.encode(data.toJson());
 
-class SearchSong {
+class SearchResult {
     bool success;
     Data data;
 
-    SearchSong({
+  SearchResult({
         required this.success,
         required this.data,
     });
 
-    factory SearchSong.fromJson(Map<String, dynamic> json) => SearchSong(
+  factory SearchResult.fromJson(Map<String, dynamic> json) => SearchResult(
         success: json["success"] ?? false,
         data: Data.fromJson(json["data"]),
     );

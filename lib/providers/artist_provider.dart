@@ -4,17 +4,17 @@ import 'package:rhythmix/services/remote.dart';
 
 class ArtistProvider extends ChangeNotifier {
   bool _isLoading = true;
-  SearchSong? _artistSongs;
+  SearchResult? _artistSongs;
 
   bool get isLoading => _isLoading;
-  SearchSong? get artistSongs => _artistSongs;
+  SearchResult? get artistSongs => _artistSongs;
 
   loadArtistSongs(String artist) async {
     
     _isLoading = true;
     notifyListeners();
 
-    SearchSong result = await searchSong(artist);
+    SearchResult result = await searchArtist(artist);
     _artistSongs = result;
     _isLoading = false;
     notifyListeners();

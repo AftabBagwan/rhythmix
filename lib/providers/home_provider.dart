@@ -20,7 +20,7 @@ class HomeProvider extends ChangeNotifier {
   loadTopAlbumSongs() async {
     List<List<Song>> listOfAlbum = [];
     for (int i = 0; i < topAlbums.length; i++) {
-      var album = await searchSong(topAlbums[i]);
+      var album = await searchAlbum(topAlbums[i]);
       listOfAlbum.add(album.data.songs);
     }
     _topAlbumSongs = listOfAlbum;
