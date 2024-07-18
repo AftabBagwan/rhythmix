@@ -42,22 +42,28 @@ class SongSnackBar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      playerProvider.currentSong.name,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      playerProvider.currentSong.artists.primary
-                          .first.name,
-                      style: TextStyle(color: AppColors.white, fontSize: 14),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          playerProvider.currentSong.name,
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          playerProvider.currentSong.artists.primary.first.name,
+                          style:
+                              TextStyle(color: AppColors.white, fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const Spacer(),
                 IconButton(
