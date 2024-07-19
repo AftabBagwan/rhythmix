@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
-import 'package:rhythmix/pages/player_shimmer.dart';
+import 'package:rhythmix/pages/shimmer/player_shimmer.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/cached_network_image.dart';

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/pages/album.dart';
 import 'package:rhythmix/pages/artist.dart';
+import 'package:rhythmix/pages/shimmer/home_shimmer.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
@@ -31,8 +32,7 @@ class Home extends StatelessWidget {
               if (homeProvider.isLoading) {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height,
-                  child: Center(
-                      child: CircularProgressIndicator(color: AppColors.white)),
+                  child: const HomeShimmer(),
                 );
               } else {
                 return Container(
