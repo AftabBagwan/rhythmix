@@ -35,7 +35,7 @@ class PlayerProvider extends ChangeNotifier {
     });
 
     if (!_hasSelectedSong) {
-      SearchResult defaultSong = await searchSong("alone");
+      SearchResult defaultSong = await searchAlbum("shershaah");
       _songQueue = defaultSong.data.songs;
       await selectSong(defaultSong.data.songs[0]);
     }

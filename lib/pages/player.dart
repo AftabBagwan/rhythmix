@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
+import 'package:rhythmix/pages/player_shimmer.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/cached_network_image.dart';
@@ -17,7 +18,7 @@ class Player extends StatelessWidget {
       body: Consumer<PlayerProvider>(
         builder: (context, playerProvider, child) {
           if (playerProvider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const PlayerShimmer();
           } else {
             Song currentSong = playerProvider.currentSong;
             return SafeArea(
@@ -35,7 +36,7 @@ class Player extends StatelessWidget {
                             currentSong.name,
                             softWrap: false,
                             style: const TextStyle(
-                              fontSize: 24,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -46,13 +47,14 @@ class Player extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         height: 300,
                         margin: const EdgeInsets.only(bottom: 20),
-                      ), 
+                      ),
                       Text(
                         currentSong.name,
                         style: const TextStyle(
-                          fontSize: 30,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
+                        softWrap: false,
                       ),
                       Text(
                         currentSong.artists.primary.first.name,
@@ -60,6 +62,7 @@ class Player extends StatelessWidget {
                           fontSize: 16,
                           color: AppColors.grey,
                         ),
+                        softWrap: false,
                       ),
                       StreamBuilder<PositionData>(
                         stream: playerProvider.positionDataStream,
@@ -74,7 +77,8 @@ class Player extends StatelessWidget {
                           );
                         },
                       ),
-                      Center(child: PlayerControlButtons(playerProvider.player)),
+                      Center(
+                          child: PlayerControlButtons(playerProvider.player)),
                     ],
                   ),
                 ),

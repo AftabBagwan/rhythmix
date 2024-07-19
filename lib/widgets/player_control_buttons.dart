@@ -113,6 +113,9 @@ class PlayerControlButtons extends StatelessWidget {
                   playerProvider.selectSong(
                       playerProvider.songQueue[playerProvider.index + 1]);
                   playerProvider.setIndex(playerProvider.index + 1);
+                } else {
+                  playerProvider.selectSong(playerProvider.songQueue[0]);
+                  playerProvider.setIndex(0);
                 }
               },
               icon: const Icon(

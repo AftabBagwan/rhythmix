@@ -17,7 +17,12 @@ class CachedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      // placeholder: (context, url) => Image.asset("assets/placeholder.webp"),
+      placeholder: (context, url) => Container(
+          margin: margin,
+          width: width, //120,
+          height: height,
+          child: const Center(
+              child: CircularProgressIndicator(color: Colors.black87))),
       errorWidget: (context, url, error) => const Icon(Icons.error),
       imageBuilder: (context, imageProvider) => Container(
         margin: margin,
