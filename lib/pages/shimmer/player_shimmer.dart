@@ -74,7 +74,7 @@ class ShimmerRectangle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: AppColors.black87,
-      highlightColor: AppColors.greyShade100,
+      highlightColor: AppColors.lightGreen,
       child: Container(
         width: width,
         height: height,
@@ -97,7 +97,7 @@ class ShimmerCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: AppColors.black87,
-      highlightColor: AppColors.greyShade100,
+      highlightColor: AppColors.lightGreen,
       child: Container(
         width: size,
         height: size,

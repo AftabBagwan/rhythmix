@@ -19,7 +19,7 @@ class GenreCard extends StatelessWidget {
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.greyShade800,
-          border: Border.all(color: AppColors.white, width: 1),
+          border: Border.all(color: AppColors.lightGreen, width: 1),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),

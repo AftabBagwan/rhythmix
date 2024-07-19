@@ -40,7 +40,7 @@ class ShimmerTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Shimmer.fromColors(
         baseColor: AppColors.black87,
-        highlightColor: AppColors.greyShade100,
+        highlightColor: AppColors.lightGreen,
         child: Container(
           width: 200,
           height: 20,
@@ -93,7 +93,7 @@ class ShimmerHorizontalItem extends StatelessWidget {
       children: [
         Shimmer.fromColors(
           baseColor: AppColors.black87,
-          highlightColor: AppColors.greyShade100,
+          highlightColor: AppColors.lightGreen,
           child: Container(
             width: screenWidth * 0.33,
             height: screenHeight * 0.15,
@@ -126,7 +126,7 @@ class ShimmerLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: AppColors.black87,
-      highlightColor: AppColors.greyShade100,
+      highlightColor: AppColors.lightGreen,
       child: Container(
         width: width,
         height: height,
@@ -166,7 +166,7 @@ class ShimmerCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: AppColors.black87,
-      highlightColor: AppColors.greyShade100,
+      highlightColor: AppColors.lightGreen,
       child: CircleAvatar(
         radius: 72,
         backgroundColor: AppColors.black87,
