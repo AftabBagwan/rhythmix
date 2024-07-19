@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/widgets/cached_network_image.dart';
 
 class SongCard extends StatelessWidget {
   const SongCard({super.key, required this.redirectTo, required this.song});
@@ -22,18 +24,13 @@ class SongCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            CachedImage(
+              imageUrl: song.image.last.url,
               width: screenWidth * (1 / 3), //120,
-              height: screenHeight * 0.15, //120,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                image: DecorationImage(
-                  image: NetworkImage(song.image.last.url),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Padding(
+              height: screenHeight * 0.15,
+              margin: EdgeInsets.zero,
+            ), //120,
+            Padding( 
               padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),
               child: Text(
                 song.name,

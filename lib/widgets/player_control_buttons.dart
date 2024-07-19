@@ -126,20 +126,24 @@ class PlayerControlButtons extends StatelessWidget {
         StreamBuilder<double>(
           stream: player.speedStream,
           builder: (context, snapshot) => IconButton(
-            icon: Text("${snapshot.data?.toStringAsFixed(1)}x",
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            icon: const Icon(Icons.repeat, size: 28),
+            // Text("${snapshot.data?.toStringAsFixed(1)}x",
+            //     style:
+            //         const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
+            // ),
             onPressed: () {
-              showSliderDialog(
-                context: context,
-                title: "Adjust speed",
-                divisions: 10,
-                min: 0.5,
-                max: 1.5,
-                value: player.speed,
-                stream: player.speedStream,
-                onChanged: player.setSpeed,
-              );
+              playerProvider.selectSong(playerProvider.songQueue[0]);
+              playerProvider.setIndex(0);
+              // showSliderDialog(
+              //   context: context,
+              //   title: "Adjust speed",
+              //   divisions: 10,
+              //   min: 0.5,
+              //   max: 1.5,
+              //   value: player.speed,
+              //   stream: player.speedStream,
+              //   onChanged: player.setSpeed,
+              // );
             },
           ),
         ),

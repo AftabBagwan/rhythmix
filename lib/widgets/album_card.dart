@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/widgets/cached_network_image.dart';
 
 class AlbumCard extends StatelessWidget {
   const AlbumCard({super.key, required this.redirectTo, required this.album});
@@ -25,20 +26,11 @@ class AlbumCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: screenWidth * (1 / 3), //120,
-              height: screenHeight * 0.15, //120,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    album.image.last.url,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            CachedImage(
+              imageUrl: album.image.last.url,
+              margin: EdgeInsets.zero,
+              width: screenWidth * (1 / 3), //120,s
+              height: screenHeight * 0.15, //120
             ),
             Padding(
               padding: const EdgeInsets.only(top: 12.0, bottom: 2.0),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/widgets/cached_network_image.dart';
 import 'package:rhythmix/widgets/common.dart';
 import 'package:rhythmix/widgets/player_control_buttons.dart';
 
@@ -40,20 +41,12 @@ class Player extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        height: 300,
+                      CachedImage(
+                        imageUrl: currentSong.image.last.url,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(currentSong.image.last.url),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
+                        height: 300,
+                        margin: const EdgeInsets.only(bottom: 20),
+                      ), 
                       Text(
                         currentSong.name,
                         style: const TextStyle(

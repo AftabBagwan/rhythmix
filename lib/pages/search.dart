@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
@@ -116,7 +117,7 @@ class Search extends StatelessWidget {
                                 width: 55,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(
+                                    image: CachedNetworkImageProvider(
                                         songs[index].image.last.url),
                                     fit: BoxFit.cover,
                                   ),

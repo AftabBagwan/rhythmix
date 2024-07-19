@@ -4,6 +4,7 @@ import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/widgets/cached_network_image.dart';
 
 class AlbumScreen extends StatelessWidget {
   const AlbumScreen({super.key, required this.songs});
@@ -24,19 +25,13 @@ class AlbumScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(
+              child: CachedImage(
+                imageUrl: songs[0].image.last.url,
+                margin: const EdgeInsets.only(bottom: 40),
                 height: screenHeight * (1 / 4), //200
                 width: screenWidth * (0.55), //200
-                margin: const EdgeInsets.only(bottom: 40),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(songs[0].image.last.url),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
               ),
-            ),
+            ), 
             Text(
               songs[0].album.name,
               overflow: TextOverflow.ellipsis,

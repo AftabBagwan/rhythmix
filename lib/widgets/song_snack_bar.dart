@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/models/song.dart';
@@ -34,7 +35,7 @@ class SongSnackBar extends StatelessWidget {
                   width: 50,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(currentSong.image.last.url),
+                      image: CachedNetworkImageProvider(currentSong.image.last.url),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(5),
