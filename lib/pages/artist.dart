@@ -79,7 +79,10 @@ class _ArtistScreenState extends State<ArtistScreen> {
                 child: Consumer<ArtistProvider>(
                   builder: (context, artistProvider, child) {
                     if (artistProvider.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.grey,
+                      ));
                     } else if (artistProvider.artistSongs == null) {
                       return const Center(child: Text('No songs found.'));
                     } else {

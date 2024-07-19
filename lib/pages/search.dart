@@ -92,7 +92,10 @@ class Search extends StatelessWidget {
               if (_searchController.text.isNotEmpty)
                 (searchProvider.searchSongResult == null ||
                         searchProvider.loading)
-                    ? const Center(child: CircularProgressIndicator())
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.black87,
+                      ))
                     : Expanded(
                         child: ListView.builder(
                           itemCount: searchProvider

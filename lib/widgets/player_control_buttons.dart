@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
+import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/widgets/common.dart';
 
 class PlayerControlButtons extends StatelessWidget {
@@ -66,7 +67,9 @@ class PlayerControlButtons extends StatelessWidget {
                     margin: const EdgeInsets.all(8.0),
                     width: 64.0,
                     height: 64.0,
-                    child: const CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: AppColors.black87,
+                    ),
                   );
                 } else if (playing != true) {
                   return IconButton(
