@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223441432883",
+    "project_id": "rhythmix-59c37",
+    "storage_bucket": "rhythmix-59c37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223441432883:android:117e41c305eec270894e46",
+        "android_client_info": {
+          "package_name": "com.example.rhythmix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC78NUTc_TU05xo01zUci74IH6MFQ5976c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
