@@ -138,8 +138,10 @@ class PlayerControlButtons extends StatelessWidget {
             //         const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
             // ),
             onPressed: () {
-              playerProvider.selectSong(playerProvider.songQueue[0]);
-              playerProvider.setIndex(0);
+              if (playerProvider.index != 0) {
+                playerProvider.selectSong(playerProvider.songQueue[0]);
+                playerProvider.setIndex(0);
+              }
               // showSliderDialog(
               //   context: context,
               //   title: "Adjust speed",
