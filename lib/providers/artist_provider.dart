@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix/models/search_song.dart';
-import 'package:rhythmix/services/remote.dart';
+import 'package:rhythmix/services/base_remote_data_source.dart';
 
 class ArtistProvider extends ChangeNotifier {
   bool _isLoading = true;

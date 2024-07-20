@@ -3,7 +3,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:rhythmix/models/search_song.dart';
 import 'package:rhythmix/models/song.dart';
-import 'package:rhythmix/services/remote.dart';
+import 'package:rhythmix/services/base_remote_data_source.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PlayerProvider extends ChangeNotifier {

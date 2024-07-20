@@ -8,7 +8,6 @@ import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/home_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
-import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/album_card.dart';
 import 'package:rhythmix/widgets/artist_card.dart';
 import 'package:rhythmix/widgets/song_card.dart';
@@ -113,7 +112,7 @@ class Home extends StatelessWidget {
                         height: screenHeight * (0.225), //180,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: artist.length,
+                          itemCount: homeProvider.topArtists.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
@@ -121,12 +120,19 @@ class Home extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        ArtistScreen(artistName: artist[index]),
+                                        ArtistScreen(
+                                      artistName: homeProvider.topArtists.keys
+                                          .elementAt(index),
+                                      artistImage: homeProvider
+                                          .topArtists.values
+                                          .elementAt(index),
+                                    ),
                                   ),
                                 );
                               },
                               child: ArtistCard(
-                                artistImageUrl: artistImage[artist[index]],
+                                artistImageUrl: homeProvider.topArtists.values
+                                    .elementAt(index),
                               ),
                             );
                           },

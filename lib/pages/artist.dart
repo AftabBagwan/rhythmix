@@ -5,12 +5,12 @@ import 'package:rhythmix/providers/artist_provider.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/providers/player_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
-import 'package:rhythmix/utils/constants.dart';
 import 'package:rhythmix/widgets/cached_network_image.dart';
 
 class ArtistScreen extends StatefulWidget {
-  const ArtistScreen({super.key, required this.artistName});
+  const ArtistScreen({super.key, required this.artistName, required this.artistImage});
   final String artistName;
+  final String artistImage;
 
   @override
   State<ArtistScreen> createState() => _ArtistScreenState();
@@ -44,10 +44,10 @@ class _ArtistScreenState extends State<ArtistScreen> {
             children: [
               Center(
                 child: CachedImage(
-                   height: screenHeight * (1 / 4), //200
+                  height: screenHeight * (1 / 4), //200
                   width: screenWidth * (0.55), //200
                   margin: const EdgeInsets.only(top: 20, bottom: 20),
-                  imageUrl: artistImage[widget.artistName],
+                  imageUrl: widget.artistImage,
                 ),
               ),
               Row(
@@ -97,7 +97,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
                               Navigator.pop(context);
                               playerProvider.selectSong(song);
                               playerProvider.selectSongQueue(
-                              artistProvider.artistSongs!.data.songs);
+                                  artistProvider.artistSongs!.data.songs);
                               bottombarProvider.changePage(1);
                               playerProvider.songSelected();
                             },
@@ -108,7 +108,8 @@ class _ArtistScreenState extends State<ArtistScreen> {
                               width: 55,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: CachedNetworkImageProvider(song.image.last.url),
+                                  image: CachedNetworkImageProvider(
+                                      song.image.last.url),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
