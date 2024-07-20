@@ -44,8 +44,9 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> loadTrendingSongs() async {
     List<Song> listOfTrending = [];
-    for (int i = 0; i < trendingSongsList.length; i++) {
-      var songs = await searchSong(trendingSongsList[i]);
+    List trendingSongs = _musicCollectionData['trending_songs'];
+    for (int i = 0; i < trendingSongs.length; i++) {
+      var songs = await searchSong(trendingSongs[i]);
       listOfTrending.add(songs.data.songs[0]);
     }
     _trendingSongs = listOfTrending;
