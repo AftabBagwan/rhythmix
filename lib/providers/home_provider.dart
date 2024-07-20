@@ -9,6 +9,7 @@ class HomeProvider extends ChangeNotifier {
   List<List<Song>> _topAlbumSongs = [];
   List<Song> _trendingSongs = [];
   Map<String, dynamic> _topArtists = {};
+  Map<String, dynamic> _musicCollectionData = {};
 
   bool get isLoading => _isLoading;
   List<List<Song>> get topAlbumSongs => _topAlbumSongs;
@@ -20,6 +21,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> _initialize() async {
+    _musicCollectionData = await fetchMusicCollectionData();
     await Future.wait([
       loadTopAlbumSongs(),
       loadTrendingSongs(),
@@ -31,7 +33,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> loadTopAlbumSongs() async {
     List<List<Song>> listOfAlbum = [];
-    List topAlbums = await fetchTopAlbums();
+    List topAlbums = _musicCollectionData['top_albums'];
     for (int i = 0; i < topAlbums.length; i++) {
       var album = await searchAlbum(topAlbums[i]);
       listOfAlbum.add(album.data.songs);
@@ -51,8 +53,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> loadTopArtists() async {
-    Map<String, dynamic> artists = await fetchArtists();
-    _topArtists = artists;
+    _topArtists = Map<String, dynamic>.from(_musicCollectionData['artists']);
     notifyListeners();
   }
 }
