@@ -59,4 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'rhythmix-59c37',
     storageBucket: 'rhythmix-59c37.appspot.com',
   );
+
 }
