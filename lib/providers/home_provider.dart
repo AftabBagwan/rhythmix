@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rhythmix/models/song.dart';
 import 'package:rhythmix/services/firestore_remote_data_source.dart';
 import 'package:rhythmix/services/base_remote_data_source.dart';
-import 'package:rhythmix/utils/constants.dart';
 
 class HomeProvider extends ChangeNotifier {
   bool _isLoading = true;
