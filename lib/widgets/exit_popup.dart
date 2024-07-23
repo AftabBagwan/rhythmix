@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:rhythmix/utils/colors.dart';
 
 class ExitPopup extends StatefulWidget {
   const ExitPopup({super.key});
@@ -14,7 +15,9 @@ class _ExitPopupState extends State<ExitPopup> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return PopScope(
+      canPop: false,
       onPopInvoked: (didPop) {
+        if (didPop) return;
         Navigator.pop(context);
       },
       child: Dialog(
@@ -47,9 +50,12 @@ class _ExitPopupState extends State<ExitPopup> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 "Are you sure want to exit?",
-                style: Theme.of(context).textTheme.displaySmall,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -60,21 +66,23 @@ class _ExitPopupState extends State<ExitPopup> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
+                      Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xfff52121),
+                      backgroundColor: AppColors.transparent,
                       shape: const StadiumBorder(),
+                      side: BorderSide(color: AppColors.grey, width: 1.5),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                       ),
                     ),
-                    child: Text(
-                      "Cancel",
+                    child: const Text(
+                      "No",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   ElevatedButton(
@@ -82,18 +90,20 @@ class _ExitPopupState extends State<ExitPopup> {
                       exit(0);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: AppColors.transparent,
                       shape: const StadiumBorder(),
-                      side: const BorderSide(
-                          color: Color(0xff3f3f3f), width: 1.5),
+                      side: BorderSide(color: AppColors.grey, width: 1.5),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Yes",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
