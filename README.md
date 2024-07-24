@@ -16,7 +16,10 @@ Welcome to **Rhythmix**, a dynamic and immersive music streaming application bui
 
 ## 📸 Screenshots
 
-![Home Screen](screenshots/home.jpg) ![Player Screen](screenshots/player.jpg) ![Search Screen](screenshots/search.jpg)
+Home             |  Player         |  Search
+:-------------------------:|:-------------------------:|:-------------------------:
+![Home Screen](screenshots/home.jpg)  |   ![Player Screen](screenshots/player.jpg)  |  ![Search Screen](screenshots/search.jpg)
+
 
 ## 🚀 Installation
 
