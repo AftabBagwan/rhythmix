@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhythmix/pages/home.dart';
+import 'package:rhythmix/pages/offline.dart';
 import 'package:rhythmix/pages/player.dart';
 import 'package:rhythmix/pages/search.dart';
 import 'package:rhythmix/providers/bottom_nav_provider.dart';
 import 'package:rhythmix/utils/colors.dart';
+import 'package:rhythmix/utils/utils.dart';
 import 'package:rhythmix/widgets/song_snack_bar.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
+
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
+  void initState() {
+    super.initState();
+    Utils.checkInternet().then((value) {
+      if (!value) {
+        Navigator.push(context,
+            (MaterialPageRoute(builder: (context) => const OfflineScreen())));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
