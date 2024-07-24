@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:rhythmix/providers/bottom_nav_provider.dart';
+import 'package:rhythmix/main.dart';
 import 'package:rhythmix/utils/colors.dart';
 import 'package:rhythmix/utils/utils.dart';
 import 'package:rhythmix/widgets/exit_popup.dart';
@@ -9,16 +8,17 @@ class OfflineScreen extends StatelessWidget {
   const OfflineScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final bottombarProvider = Provider.of<BottomNavProvider>(context);
     return PopScope(
+      canPop: false,
       onPopInvoked: (didPop) {
         Utils.checkInternet().then((value) {
           if (value) {
-            bottombarProvider.changePage(0);
-            return true;
+            Navigator.push(
+                context,
+                (MaterialPageRoute(
+                    builder: (context) => const MyApp())));
           } else {
             _exitPopup(context);
-            return true;
           }
         });
       },
