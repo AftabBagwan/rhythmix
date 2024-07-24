@@ -15,7 +15,7 @@ class SongCard extends StatelessWidget {
     return GestureDetector(
       onTap: redirectTo,
       child: Container(
-        margin: const EdgeInsets.only(top: 20, right: 20),
+        margin: const EdgeInsets.only(top: 10, right: 20),
         width: screenWidth * (1 / 3), //120,
         height: screenHeight * 0.2, //160,
         decoration: const BoxDecoration(

@@ -46,7 +46,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.music_note),
+                icon: Icon(Icons.headphones),
                 label: "Player",
               ),
               BottomNavigationBarItem(
