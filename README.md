@@ -2,6 +2,12 @@
 
 Welcome to **Rhythmix**, a dynamic and immersive music streaming application built with Flutter using Jio Saavn Api. Rhythmix allows users to search for songs, listen to their favorite music, explore top albums, and much more.
 
+## 📲 Download APK
+
+**Download the latest APK of the Rhythmix app from the following link:**
+
+[**Download Rhythmix APK**](https://drive.google.com/file/d/1zmdNhQNRonf15yXFCoyKVfSKeb8a4jwP/view?usp=sharing)
+
 ## 🌟 Features
 
 - **🏠 Home Page**: Discover trending songs, top albums, and popular artists, all in one place.
