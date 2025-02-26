@@ -21,7 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void initState() {
     super.initState();
     Utils.checkInternet().then((value) {
-      if (!value) {
+      if (!value && mounted ) {
         Navigator.push(context,
             (MaterialPageRoute(builder: (context) => const OfflineScreen())));
       }
