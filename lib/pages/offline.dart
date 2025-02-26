@@ -12,12 +12,11 @@ class OfflineScreen extends StatelessWidget {
       canPop: false,
       onPopInvoked: (didPop) {
         Utils.checkInternet().then((value) {
-          if (value) {
-            Navigator.push(
-                context,
-                (MaterialPageRoute(
-                    builder: (context) => const MyApp())));
+          if (value && context.mounted ) {
+            Navigator.push(context,
+                (MaterialPageRoute(builder: (context) => const MyApp())));
           } else {
+            if (!context.mounted) return;
             _exitPopup(context);
           }
         });
@@ -57,7 +56,7 @@ class OfflineScreen extends StatelessWidget {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: const Color(0xff191919).withOpacity(0.9),
+      barrierColor: const Color(0xff191919).withValues(alpha: 0.9),
       builder: (BuildContext context) {
         return const ExitPopup();
       },
