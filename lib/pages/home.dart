@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
     return showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: AppColors.transparent.withOpacity(0.9),
+      barrierColor: AppColors.transparent.withValues(alpha: 0.9),
       builder: (BuildContext context) {
         return const ExitPopup();
       },

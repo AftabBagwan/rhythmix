@@ -12,7 +12,7 @@ import firebase_core
 import firebase_crashlytics
 import just_audio
 import path_provider_foundation
-import sqflite
+import sqflite_darwin
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioSessionPlugin.register(with: registry.registrar(forPlugin: "AudioSessionPlugin"))
